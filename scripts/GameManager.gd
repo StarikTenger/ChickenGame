@@ -49,7 +49,6 @@ func spawn_resource_cluster(item_name: String, center: Vector2, count: int):
 func add_coins(amount: int):
 	coins += amount
 	coins_changed.emit()
-	print("Coins: ", coins)
 	
 func spawn_cluster(item_name: String, position: Vector2):
 	var spawner = spawner_scene.instantiate()

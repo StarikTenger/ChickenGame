@@ -83,3 +83,6 @@ func consume_egg(egg: Node):
 	# Remove the egg from the scene
 	egg.queue_free()
 	holding_egg = null
+
+	# Add coins
+	game_manager.add_coins(game_manager.egg_cost)
