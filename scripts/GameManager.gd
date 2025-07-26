@@ -14,6 +14,8 @@ signal coins_changed(value: int)
 var collector_bot_price: int = 0
 signal collector_price_changed(price: int)
 
+var egg_cost: int = 5  # Coins awarded when slug consumes an egg
+
 func _ready():
 	await get_tree().process_frame
 	robot_container = get_node("Robots")

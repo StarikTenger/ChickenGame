@@ -40,7 +40,16 @@ func try_tossing(delta):
 	if holding_egg == null:
 		return # No egg to toss
 	
-	# Find a suitable robot to toss to
+	# First priority: try to toss to slugs
+	for slug in get_tree().get_nodes_in_group("slugs"):
+		if position.distance_to(slug.position) <= toss_radius:
+			if not slug.awaiting_egg:
+				# Found a valid slug target, start tossing
+				toss_egg_to(slug)
+				toss_timer = toss_delay # Reset toss timer
+				return
+	
+	# Second priority: try to toss to other robots
 	for robot in get_tree().get_nodes_in_group("robots"):
 		if robot == self:
 			continue # Don't toss to self
@@ -53,22 +62,22 @@ func try_tossing(delta):
 				toss_timer = toss_delay # Reset toss timer
 				break
 
-func toss_egg_to(target_robot: Node):
+func toss_egg_to(target: Node):
 	if holding_egg == null:
 		return
 	
 	# Set target as awaiting egg
-	target_robot.awaiting_egg = true
+	target.awaiting_egg = true
 	
 	# Set up egg for flight
 	holding_egg.state = holding_egg.ItemState.IN_FLIGHT
-	holding_egg.current_owner = target_robot
+	holding_egg.current_owner = target
 	holding_egg.source_pos = position
-	holding_egg.destination_pos = target_robot.position
+	holding_egg.destination_pos = target.position
 	holding_egg.flight_progress = 0.0
 	
 	# Calculate flight speed based on distance and tossing speed
-	var distance = position.distance_to(target_robot.position)
+	var distance = position.distance_to(target.position)
 	holding_egg.flight_progress_speed = tossing_speed / distance
 	
 	# Release the egg
@@ -76,7 +85,8 @@ func toss_egg_to(target_robot: Node):
 	
 	# Calculate estimated flight time
 	var estimated_flight_time = distance / tossing_speed
-	print("Egg tossed to robot at ", target_robot.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
+	var target_type = "slug" if target.is_in_group("slugs") else "robot"
+	print("Egg tossed to ", target_type, " at ", target.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
 
 func _ready():
 	add_to_group("robots")
