@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq83gdrnlqhud"]
+
+[ext_resource type="Script" uid="uid://b7ep87yi4it48" path="res://scripts/robots/MegaConsumer.gd" id="1_k2oj2"]
+[ext_resource type="Texture2D" uid="uid://cd7crgdm35wix" path="res://sprites/mega_consumer.png" id="2_b24k5"]
+[ext_resource type="Shape2D" uid="uid://c577nsv2noliw" path="res://shapes/mega_consumer_shape.tres" id="3_a06yx"]
+
+[node name="MegaConsumer" type="Node2D"]
+script = ExtResource("1_k2oj2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_b24k5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("3_a06yx")

@@ -5,7 +5,7 @@ extends Node
 
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
-var collector_scene := preload("res://scenes/robots/CollectorRobot.tscn")
+var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 
 var coins: int = 0
@@ -20,7 +20,7 @@ func _ready():
 	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
 
 func spawn_mega_consumer():
-	var mega_scene = preload("res://scenes/robots/MegaConsumer.tscn")
+	var mega_scene = preload("res://scenes/entities/Slug.tscn")
 	var mega = mega_scene.instantiate()
 	robot_container.add_child(mega)
 	mega.position = Vector2(640, 360)
