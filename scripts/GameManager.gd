@@ -3,10 +3,14 @@ extends Node
 @onready var grid = $Grid
 @onready var robot_container = $Robots
 
+
+var selected_robot: CollectorRobot = null
+
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
+
 
 var coins: int = 0
 signal coins_changed(value: int)
@@ -18,6 +22,29 @@ func _ready():
 	spawn_mega_consumer()
 	spawn_cluster("egg", Vector2(300, 300))
 	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
+	
+	# Подписываемся на сигнал выбора робота
+	for robot in robot_container.get_children():
+		if robot.has_signal("robot_selected"):
+			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
+
+func _on_robot_selected(robot: CollectorRobot):
+	if selected_robot:
+		selected_robot.set_selected(false)
+
+	selected_robot = robot
+	selected_robot.set_selected(true)
+	print("Выбран робот: ", robot.name)
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			var mouse_pos = get_viewport().get_mouse_position()
+
+			# Если выбран робот и мы кликаем по карте
+			if selected_robot != null:
+				selected_robot.target_position = mouse_pos
+				selected_robot.is_moving = true
 
 func spawn_mega_consumer():
 	var mega_scene = preload("res://scenes/entities/Slug.tscn")
@@ -45,6 +72,9 @@ func spawn_collector_bot():
 	var bot = collector_scene.instantiate()
 	robot_container.add_child(bot)
 	bot.position = Vector2(300, 300)
+	
+	 # Подписываемся на сигнал выбора сразу после создания
+	bot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 
 	coins -= collector_bot_price
 	print("Построен сборщик. Монеты: ", coins)
@@ -64,3 +94,4 @@ func spawn_cluster(item_name: String, position: Vector2):
 	spawner.item_name = item_name
 	spawner.global_position = position
 	add_child(spawner)
+	

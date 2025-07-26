@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://gitujn07gqgc"]
+[gd_scene load_steps=6 format=3 uid="uid://gitujn07gqgc"]
 
-[ext_resource type="Script" uid="uid://bglrk3560wifu" path="res://scripts/robots/CollectorRobot.gd" id="1_lx7qx"]
+[ext_resource type="Script" uid="uid://bglrk3560wifu" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
 [ext_resource type="Texture2D" uid="uid://d0gkg2ir1w6gv" path="res://sprites/collector.png" id="2_qlqxp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlqxp"]
 radius = 17.0294
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1r7id"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uj035"]
 
 [node name="CollectorRobot" type="CharacterBody2D"]
 script = ExtResource("1_lx7qx")
@@ -21,3 +23,10 @@ shape = SubResource("CircleShape2D_qlqxp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1r7id")
+
+[node name="SelectionFrame" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.175, 1.175)
+texture = SubResource("ViewportTexture_uj035")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -6,8 +6,31 @@ class_name CollectorRobot
 var storage: Dictionary = {}
 var stored_type: String = ""
 
+#движение 
+var target_position: Vector2
+var is_moving: bool = false
+var speed: float = 100.0
+
+signal robot_selected(robot)
+
+@onready var selection_frame = $SelectionFrame
+
 @export var collect_delay: float = 1.0  # задержка в секундах
 var collect_timer := 1.0
+
+
+
+func _process(delta):
+	if is_moving:
+		var direction = (target_position - position).normalized()
+		velocity = direction * speed
+
+		# Если дошли почти до точки
+		if position.distance_to(target_position) < 5:
+			velocity = Vector2.ZERO
+			is_moving = false
+		
+		move_and_slide()
 
 func _physics_process(delta):
 	collect_timer -= delta
@@ -31,3 +54,13 @@ func _physics_process(delta):
 			collect_timer = collect_delay  # сбрасываем таймер
 			print("Собрал: ", stored_type, ", всего: ", storage[stored_type])
 			break
+			
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			emit_signal("robot_selected", self)
+
+func set_selected(is_selected: bool):
+	selection_frame.visible = is_selected
