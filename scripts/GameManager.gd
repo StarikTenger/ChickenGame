@@ -1,7 +1,7 @@
 extends Node
-
+class_name GameManager
 @onready var grid = $Grid
-@onready var robot_container: Node = null
+@onready var robot_container: Node = $Robots
 
 
 var selected_robot: CollectorRobot = null
@@ -21,8 +21,10 @@ signal collector_price_changed(price: int)
 var egg_cost: int = 5  # Coins awarded when slug consumes an egg
 
 func _ready():
-	await get_tree().process_frame
-	robot_container = get_node("Robots")
+	for robot in get_tree().get_nodes_in_group("robots"):
+		if robot.has_signal("robot_selected"):
+			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
+			print("Подписал стартового робота:", robot.name)
 	spawn_mega_consumer()
 	spawn_cluster("egg", Vector2(300, 300))
 	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
@@ -43,15 +45,25 @@ func _on_robot_selected(robot: CollectorRobot):
 	print("Выбран робот: ", robot.name)
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			var mouse_pos = get_viewport().get_mouse_position()
-
-			# Если выбран робот и мы кликаем по карте
-			if selected_robot != null:
-				selected_robot.target_position = mouse_pos
-				selected_robot.is_moving = true
-
+	if event is not InputEventMouseButton or not event.pressed or event.button_index != MOUSE_BUTTON_LEFT:
+		return
+	if selected_robot == null:
+		return
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	for robot in get_tree().get_nodes_in_group("robots"):
+		var area = robot.get_node("Area2D") as Area2D
+		var cs   = area.get_node("CollisionShape2D") as CollisionShape2D
+		var shape = cs.shape
+		if shape is CircleShape2D:
+			if robot.global_position.distance_to(mouse_pos) <= shape.radius:
+				return
+		elif shape is RectangleShape2D:
+			var local = robot.to_local(mouse_pos)
+			if abs(local.x) <= shape.extents.x and abs(local.y) <= shape.extents.y:
+				return
+	selected_robot.target_position = mouse_pos
+	selected_robot.is_moving = true
 
 func spawn_mega_consumer():
 	if not is_instance_valid(robot_container):
@@ -83,6 +95,10 @@ func spawn_collector_bot():
 	var bot = collector_scene.instantiate()
 	robot_container.add_child(bot)
 	bot.position = Vector2(300, 300)
+	
+	if bot.has_signal("robot_selected"):
+		bot.connect("robot_selected", Callable(self, "_on_robot_selected"))
+		print("Подписал нового робота:", bot.name)
 	
 	 # Подписываемся на сигнал выбора сразу после создания
 	bot.connect("robot_selected", Callable(self, "_on_robot_selected"))

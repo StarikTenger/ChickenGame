@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://40ly1prbivcd"]
 
-[ext_resource type="Script" uid="uid://e2p7am4ssxwf" path="res://scripts/GameUI.gd" id="1_yubou"]
+[ext_resource type="Script" uid="uid://dx3fu2ljkuuix" path="res://scripts/GameUI.gd" id="1_yubou"]
 [ext_resource type="Texture2D" uid="uid://d0gkg2ir1w6gv" path="res://sprites/collector.png" id="2_rns2u"]
 
 [node name="GameUI" type="CanvasLayer"]
@@ -11,6 +11,7 @@ anchors_preset = 0
 offset_left = 1.0
 offset_right = 1284.0
 offset_bottom = 254.0
+mouse_filter = 2
 script = ExtResource("1_yubou")
 
 [node name="BuildBar" type="HBoxContainer" parent="Control"]

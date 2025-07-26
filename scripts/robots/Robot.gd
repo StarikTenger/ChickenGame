@@ -145,9 +145,8 @@ func _draw():
 	draw_string(font, text_pos, coord_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			emit_signal("robot_selected", self)
-
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		emit_signal("robot_selected", self)
+		#(опционально) print("CLICKED robot:", name)
 func set_selected(is_selected: bool):
 	selection_frame.visible = is_selected
