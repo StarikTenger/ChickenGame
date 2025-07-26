@@ -24,7 +24,7 @@ func _on_timer_timeout():
 		if item.item_name == item_name and global_position.distance_to(item.global_position) <= spawn_radius:
 			nearby_count += 1
 	
-	# print("Рядом ", item_name, ": ", nearby_count)
+	print("Рядом ", item_name, ": ", nearby_count)
 	
 	if nearby_count >= max_nearby_items:
 		return  # слишком много вокруг — не спавним
@@ -37,4 +37,4 @@ func _on_timer_timeout():
 	item.position = global_position + offset
 	items_container.add_child(item)
 
-	# print("Спавн ", item_name, " в ", item.position)
+	print("Спавн ", item_name, " в ", item.position)
