@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cujfp7ibhtujw"]
+
+[ext_resource type="Script" uid="uid://3ty58on67pq2" path="res://scripts/Chicken.gd" id="1_4c2k2"]
+[ext_resource type="Texture2D" uid="uid://bws36e8s5mg5i" path="res://sprites/items/egg2.png" id="2_k72xk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k72xk"]
+
+[node name="Chicken" type="CharacterBody2D"]
+script = ExtResource("1_4c2k2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k72xk")
+
+[node name="EggTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k72xk")
+disabled = true
+
+[connection signal="timeout" from="EggTimer" to="." method="_on_egg_timer_timeout"]
