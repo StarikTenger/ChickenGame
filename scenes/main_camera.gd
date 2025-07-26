@@ -40,6 +40,10 @@ func _process(delta):
 	
 	global_position = global_position.lerp(target_position, delta * smooth_speed)
 
+func absolute_mouse_position() -> Vector2:
+	# returns the mouse position in absolute coordinates, considering camera zoom
+	return get_viewport().get_mouse_position() / zoom + global_position - get_viewport_rect().size * 0.5 / zoom
+
 func apply_zoom(amount: float):
 	var new_zoom = zoom + Vector2(amount, amount)
 	new_zoom.x = clamp(new_zoom.x, zoom_min, zoom_max)

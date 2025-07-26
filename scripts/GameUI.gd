@@ -19,7 +19,7 @@ func _on_collector_input(event):
 		if event.pressed:
 			start_drag()
 		else:
-			try_place_bot(get_global_mouse_position())
+			try_place_bot(cam.absolute_mouse_position())
 
 func start_drag():
 	if ghost:
@@ -32,7 +32,7 @@ func start_drag():
 
 func _process(delta: float) -> void:
 	if dragging and ghost:
-		ghost.global_position = get_viewport().get_mouse_position()
+		ghost.global_position = cam.absolute_mouse_position()
 		print(delta)
 
 func try_place_bot(pos: Vector2):
