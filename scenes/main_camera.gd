@@ -3,10 +3,15 @@ extends Camera2D
 var dragging := false
 var drag_start_screen_pos := Vector2.ZERO
 var drag_start_camera_pos := Vector2.ZERO
+var target_position: Vector2
 
 @export var zoom_step := 0.1
 @export var zoom_min := 0.2
 @export var zoom_max := 3.0
+var smooth_speed := 10.0
+
+func _ready():
+	target_position = global_position
 
 func _unhandled_input(event):
 	# ПКМ: начать/остановить перетаскивание
@@ -14,7 +19,8 @@ func _unhandled_input(event):
 		if event.pressed:
 			dragging = true
 			drag_start_screen_pos = get_viewport().get_mouse_position()
-			drag_start_camera_pos = global_position
+			print("M1 - ", drag_start_camera_pos)
+			drag_start_camera_pos = target_position
 		else:
 			dragging = false
 
@@ -28,8 +34,11 @@ func _unhandled_input(event):
 func _process(delta):
 	if dragging:
 		var current_mouse_pos = get_viewport().get_mouse_position()
-		var delta_pixels = drag_start_screen_pos - current_mouse_pos
-		global_position = drag_start_camera_pos + delta_pixels * zoom
+		print("M2 - ", current_mouse_pos)
+		var delta_pixels = (drag_start_screen_pos - current_mouse_pos) / zoom / zoom
+		target_position = drag_start_camera_pos + delta_pixels * zoom
+	
+	global_position = global_position.lerp(target_position, delta * smooth_speed)
 
 func apply_zoom(amount: float):
 	var new_zoom = zoom + Vector2(amount, amount)

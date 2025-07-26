@@ -4,7 +4,10 @@ extends Control
 @onready var collector_label := $BuildBar/CollectorSlot/VBoxContainer/CollectorLabel
 @onready var feedback_label := $FeedbackLabel
 @onready var gm := get_node("/root/Main")
+@onready var cam := get_node("/root/Main/MainCamera")
 
+var ghost_target_position: Vector2
+var ghost_lerp_speed := 20.0
 var dragging := false
 var ghost: Node = null
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
@@ -22,12 +25,13 @@ func start_drag():
 	ghost = collector_scene.instantiate()
 	ghost.is_ghost = true
 	ghost.modulate = Color(1, 1, 1, 0.5)
-	get_tree().get_root().add_child(ghost)
+	get_tree().root.get_node("Main").add_child(ghost)
 	dragging = true
 
 func _process(delta: float) -> void:
 	if dragging and ghost:
-		ghost.global_position = get_global_mouse_position()
+		ghost.global_position = get_viewport().get_mouse_position()
+		print(delta)
 
 func try_place_bot(pos: Vector2):
 	dragging = false
