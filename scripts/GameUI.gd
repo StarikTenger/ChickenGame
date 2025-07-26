@@ -3,6 +3,7 @@ extends Control
 @onready var collector_button := $BuildBar/CollectorSlot/VBoxContainer/CollectorButton
 @onready var collector_label := $BuildBar/CollectorSlot/VBoxContainer/CollectorLabel
 @onready var feedback_label := $FeedbackLabel
+@onready var coins_label := $CoinsLabel
 @onready var gm := get_node("/root/Main")
 
 var dragging := false
@@ -45,10 +46,12 @@ func try_place_bot(pos: Vector2):
 	gm.robot_container.add_child(bot)
 	bot.global_position = pos
 	gm.coins -= price
-	gm.coins_changed.emit(gm.coins)
+	
 	if price == 0:
 		gm.collector_bot_price = 10
 		gm.collector_price_changed.emit(10)
+
+	gm.coins_changed.emit()
 
 func show_feedback(text: String):
 	feedback_label.text = text
@@ -67,6 +70,7 @@ func update_collector_ui():
 	print("Обновление UI: монет =", gm.coins, ", цена =", gm.collector_bot_price)
 	var price = gm.collector_bot_price
 	var can_afford = gm.coins >= price
+	coins_label.text = str(gm.coins) + "$"
 
 	collector_label.text = "Сборщик (" + str(price) + "$)"
 	if can_afford:

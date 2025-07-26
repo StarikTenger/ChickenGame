@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://40ly1prbivcd"]
 
-[ext_resource type="Script" uid="uid://e2p7am4ssxwf" path="res://scripts/GameUI.gd" id="1_yubou"]
+[ext_resource type="Script" uid="uid://d1uujop1cuykr" path="res://scripts/GameUI.gd" id="1_yubou"]
 [ext_resource type="Texture2D" uid="uid://d0gkg2ir1w6gv" path="res://sprites/collector.png" id="2_rns2u"]
 
 [node name="GameUI" type="CanvasLayer"]
@@ -40,7 +40,14 @@ horizontal_alignment = 1
 
 [node name="FeedbackLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 96.0
-offset_right = 205.0
-offset_bottom = 159.0
+offset_left = 115.0
+offset_top = -2.0
+offset_right = 319.0
+offset_bottom = 61.0
+
+[node name="CoinsLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 57.0
+offset_right = 86.0
+offset_bottom = 96.0

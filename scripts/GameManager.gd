@@ -10,7 +10,7 @@ var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
 var coins: int = 100
-signal coins_changed(value: int)
+signal coins_changed()
 
 var collector_bot_price: int = 0
 signal collector_price_changed(price: int)
@@ -46,27 +46,9 @@ func spawn_resource_cluster(item_name: String, center: Vector2, count: int):
 
 		items_container.add_child(item)
 
-func spawn_collector_bot():
-	if coins < collector_bot_price:
-		print("Недостаточно монет: нужно ", collector_bot_price, ", есть ", coins)
-		return
-	
-	var bot = collector_scene.instantiate()
-	robot_container.add_child(bot)
-	bot.position = Vector2(300, 300)
-
-	coins -= collector_bot_price
-	coins_changed.emit(coins)
-	print("Построен сборщик. Монеты: ", coins)
-	
-	# Повышаем цену после первой покупки
-	if collector_bot_price == 0:
-		collector_bot_price = 10
-		collector_price_changed.emit(collector_bot_price)
-
 func add_coins(amount: int):
 	coins += amount
-	coins_changed.emit(coins)
+	coins_changed.emit()
 	print("Coins: ", coins)
 	
 func spawn_cluster(item_name: String, position: Vector2):

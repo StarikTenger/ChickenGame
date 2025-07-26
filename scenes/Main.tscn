@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckl15loudy8ry"]
 
-[ext_resource type="Script" uid="uid://dvkho3e4uv61k" path="res://scripts/GameManager.gd" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://b8wgfjx7fk2ij" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cvs2rg1xwqi8y" path="res://scenes/map/Grid.tscn" id="2_rvslj"]
 
