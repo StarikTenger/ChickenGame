@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name CollectorRobot
 
+@export var is_ghost: bool = false
+
 @export var collect_radius: float = 64.0
 @export var max_capacity: int = 10
 var storage: Dictionary = {}
@@ -10,6 +12,9 @@ var stored_type: String = ""
 var collect_timer := 1.0
 
 func _physics_process(delta):
+	if is_ghost:
+		return
+	
 	collect_timer -= delta
 	if collect_timer > 0:
 		return
