@@ -2,7 +2,7 @@ extends Node
 class_name GameManager
 @onready var grid = $Grid
 @onready var robot_container: Node = $Robots
-
+@onready var cam := get_node("/root/Main/MainCamera")
 
 var selected_robot: CollectorRobot = null
 
@@ -36,12 +36,20 @@ func _ready():
 	
 	spawn_chickens(5)
 
+func select_robot(robot: CollectorRobot):
+	selected_robot = robot
+	selected_robot.set_selected(true)
+
+func unselect_robot():
+	if selected_robot:
+		selected_robot.set_selected(false)
+		selected_robot = null
+
 func _on_robot_selected(robot: CollectorRobot):
 	if selected_robot:
 		selected_robot.set_selected(false)
 
-	selected_robot = robot
-	selected_robot.set_selected(true)
+	select_robot(robot)
 	print("Выбран робот: ", robot.name)
 
 func _unhandled_input(event):
@@ -49,7 +57,7 @@ func _unhandled_input(event):
 		return
 	if selected_robot == null:
 		return
-	var mouse_pos = get_viewport().get_mouse_position()
+	var mouse_pos = cam.absolute_mouse_position()
 	
 	for robot in get_tree().get_nodes_in_group("robots"):
 		var area = robot.get_node("Area2D") as Area2D
@@ -64,6 +72,7 @@ func _unhandled_input(event):
 				return
 	selected_robot.target_position = mouse_pos
 	selected_robot.is_moving = true
+	unselect_robot()
 
 func spawn_mega_consumer():
 	if not is_instance_valid(robot_container):
