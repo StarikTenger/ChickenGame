@@ -10,11 +10,17 @@ config_version=5
 
 [application]
 
-config/name="ChickenGame"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/name="eggs"
+run/main_scene="uid://ckl15loudy8ry"
+config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
