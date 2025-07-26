@@ -24,14 +24,18 @@ var flight_progress_speed = 0 # Calculated from distance when throwing
 
 # TODO: egg flight animation, it should be not straight line
 
-func collect_from_ground(owner: Node):
-	self.current_owner = owner
+func collect_from_ground(new_owner: Node) -> bool:
+	if state != ItemState.GROUND:
+		return false # Cannot collect if not on ground
+
+	self.current_owner = new_owner
 	state = ItemState.ROBOT
 	
 	# Move item to owner's position
-	position = owner.position
+	position = new_owner.position
 	
-	print("Egg collected")
+	print("Egg collected at owner position: ", new_owner.position)
+	return true
 	
 
 func toss_to(target_owner: Node, source_position: Vector2, target_position: Vector2, speed: float):
@@ -45,9 +49,10 @@ func toss_to(target_owner: Node, source_position: Vector2, target_position: Vect
 func catch_by_receiver():
 	state = ItemState.ROBOT
 	position = current_owner.position
+	var flight_time = flight_progress / flight_progress_speed if flight_progress_speed > 0 else 0
 	if current_owner.has_method("receive_egg"):
 		current_owner.receive_egg(self)
-	print("Egg caught by receiver")
+	print("Egg caught by receiver | Flight time: ", "%.2f" % flight_time, "s")
 
 func _ready():
 	add_to_group("items")

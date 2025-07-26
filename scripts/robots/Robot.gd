@@ -19,15 +19,14 @@ var toss_timer := 1.0
 
 func try_collection(delta):
 	collect_timer -= delta
-	if collect_timer > 0:
+	if collect_timer > 0 or awaiting_egg:
 		return 
 	if holding_egg != null:
 		return # Already holding an egg
 	for item in get_tree().get_nodes_in_group("items"):
-		if position.distance_to(item.position) <= collect_radius:
+		if position.distance_to(item.position) <= collect_radius and item.collect_from_ground(self):
 			
 			holding_egg = item
-			item.collect_from_ground(self)
 			
 			collect_timer = collect_delay  # Reset collection timer
 			toss_timer = toss_delay # Reset toss timer when picking up egg
@@ -45,6 +44,8 @@ func try_tossing(delta):
 	for robot in get_tree().get_nodes_in_group("robots"):
 		if robot == self:
 			continue # Don't toss to self
+		if robot.is_ghost:
+			continue # Don't toss to ghost robots
 		if position.distance_to(robot.position) <= toss_radius:
 			if not robot.awaiting_egg and robot.holding_egg == null:
 				# Found a valid target, start tossing
@@ -73,7 +74,9 @@ func toss_egg_to(target_robot: Node):
 	# Release the egg
 	holding_egg = null
 	
-	print("Egg tossed to robot at ", target_robot.position)
+	# Calculate estimated flight time
+	var estimated_flight_time = distance / tossing_speed
+	print("Egg tossed to robot at ", target_robot.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
 
 func _ready():
 	add_to_group("robots")
@@ -90,3 +93,22 @@ func receive_egg(egg: Node):
 	awaiting_egg = false
 	toss_timer = toss_delay # Reset toss timer when receiving egg
 	print("Robot received egg")
+
+func _draw():
+	if is_ghost:
+		return
+	
+	# Draw collection radius (inner circle)
+	draw_arc(Vector2.ZERO, collect_radius, 0, TAU, 64, Color.GREEN, 2.0)
+	
+	# Draw toss radius (outer circle) - only if different from collect radius
+	if toss_radius != collect_radius:
+		draw_arc(Vector2.ZERO, toss_radius, 0, TAU, 64, Color.BLUE, 2.0)
+	
+	# Draw coordinates above the robot
+	var coord_text = "(%d, %d)" % [int(position.x), int(position.y)]
+	var font = ThemeDB.fallback_font
+	var font_size = 12
+	var text_size = font.get_string_size(coord_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+	var text_pos = Vector2(-text_size.x / 2, -collect_radius - 20)
+	draw_string(font, text_pos, coord_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
