@@ -11,6 +11,15 @@ class_name CollectorRobot
 
 @export var is_ghost: bool = false
 
+#движение 
+var target_position: Vector2
+var is_moving: bool = false
+var speed: float = 100.0
+
+signal robot_selected(robot)
+
+@onready var selection_frame = $SelectionFrame
+
 var holding_egg: Node = null # Reference to the egg
 var awaiting_egg: bool = false # If true, waiting for egg to arrive, cannot accept egg proposals
 
@@ -98,6 +107,18 @@ func _physics_process(delta):
 	try_collection(delta)
 	try_tossing(delta)
 
+func _process(delta):
+	if is_moving:
+		var direction = (target_position - position).normalized()
+		velocity = direction * speed
+
+		# Если дошли почти до точки
+		if position.distance_to(target_position) < 5:
+			velocity = Vector2.ZERO
+			is_moving = false
+		
+		move_and_slide()
+
 func receive_egg(egg: Node):
 	holding_egg = egg
 	awaiting_egg = false
@@ -122,3 +143,10 @@ func _draw():
 	var text_size = font.get_string_size(coord_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	var text_pos = Vector2(-text_size.x / 2, -collect_radius - 20)
 	draw_string(font, text_pos, coord_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		emit_signal("robot_selected", self)
+		#(опционально) print("CLICKED robot:", name)
+func set_selected(is_selected: bool):
+	selection_frame.visible = is_selected

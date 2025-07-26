@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var collector_button := $BuildBar/CollectorSlot/VBoxContainer/CollectorButton
 @onready var collector_label := $BuildBar/CollectorSlot/VBoxContainer/CollectorLabel
 @onready var feedback_label := $FeedbackLabel
@@ -47,7 +48,10 @@ func try_place_bot(pos: Vector2):
 	
 	var bot = collector_scene.instantiate()
 	bot.is_ghost = false
+	print(">>> GameUI.gd: gm=", gm, " is_class GameManager? ", gm is GameManager)
 	gm.robot_container.add_child(bot)
+	if bot.has_signal("robot_selected"):
+		bot.connect("robot_selected", Callable(gm, "_on_robot_selected"))
 	bot.global_position = pos
 	gm.coins -= price
 	
@@ -64,6 +68,7 @@ func show_feedback(text: String):
 	feedback_label.visible = false
 
 func _ready():
+	print("GameUI got gm:", gm, "class=", gm.get_class())
 	collector_button.gui_input.connect(_on_collector_input)
 	feedback_label.visible = false
 	gm.collector_price_changed.connect(update_collector_ui)

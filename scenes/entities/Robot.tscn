@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gitujn07gqgc"]
+[gd_scene load_steps=6 format=3 uid="uid://gitujn07gqgc"]
 
-[ext_resource type="Script" uid="uid://bglrk3560wifu" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
+[ext_resource type="Script" uid="uid://df1ohngxtyi0c" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
 [ext_resource type="Texture2D" uid="uid://d0gkg2ir1w6gv" path="res://sprites/collector.png" id="2_qlqxp"]
+[ext_resource type="Texture2D" uid="uid://cq2w60efeudtc" path="res://sprites/collector_s.png" id="3_oaug8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlqxp"]
 radius = 17.0294
@@ -21,3 +22,10 @@ shape = SubResource("CircleShape2D_qlqxp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1r7id")
+
+[node name="SelectionFrame" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.175, 1.175)
+texture = ExtResource("3_oaug8")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
