@@ -9,6 +9,8 @@ class_name CollectorRobot
 @export var max_velocity: float = 1 # TODO: value
 @export var tossing_speed: float = 100 # egg speed when tossing
 
+@export var is_ghost: bool = false
+
 var holding_egg: Node = null # Reference to the egg
 var awaiting_egg: bool = false # If true, waiting for egg to arrive, cannot accept egg proposals
 
@@ -77,6 +79,9 @@ func _ready():
 	add_to_group("robots")
 
 func _physics_process(delta):
+	if is_ghost:
+		return
+	
 	try_collection(delta)
 	try_tossing(delta)
 

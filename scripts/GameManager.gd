@@ -1,25 +1,31 @@
 extends Node
 
 @onready var grid = $Grid
-@onready var robot_container = $Robots
+@onready var robot_container: Node = null
 
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 
-var coins: int = 0
+var coins: int = 100
 signal coins_changed(value: int)
 
 var collector_bot_price: int = 0
 signal collector_price_changed(price: int)
 
 func _ready():
+	await get_tree().process_frame
+	robot_container = get_node("Robots")
 	spawn_mega_consumer()
 	spawn_cluster("egg", Vector2(300, 300))
 	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
 
 func spawn_mega_consumer():
+	if not is_instance_valid(robot_container):
+		push_error("robot_container is null!")
+		return
+		
 	var mega_scene = preload("res://scenes/entities/Slug.tscn")
 	var mega = mega_scene.instantiate()
 	robot_container.add_child(mega)
@@ -47,6 +53,7 @@ func spawn_collector_bot():
 	bot.position = Vector2(300, 300)
 
 	coins -= collector_bot_price
+	coins_changed.emit(coins)
 	print("Построен сборщик. Монеты: ", coins)
 	
 	# Повышаем цену после первой покупки
