@@ -48,6 +48,14 @@ func catch_by_receiver():
 	state = ItemState.ROBOT
 	position = current_owner.position
 	var flight_time = flight_progress / flight_progress_speed if flight_progress_speed > 0 else 0
+
+	# Check that the owner is in correct position
+	if current_owner.position.distance_to(destination_pos) > 10:
+		# TODO: break egg animation
+		print("Egg missed the receiver! Current position: ", current_owner.position, " | Expected position: ", destination_pos)
+		queue_free()
+		return
+
 	if current_owner.has_method("receive_egg"):
 		current_owner.receive_egg(self)
 	print("Egg caught by receiver | Flight time: ", "%.2f" % flight_time, "s")
