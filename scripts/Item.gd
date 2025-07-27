@@ -58,6 +58,7 @@ func catch_by_receiver():
 			# Play the egg splat animation before despawning
 			sprite.play("egg_splat")
 			await sprite.animation_finished
+		current_owner.awaiting_egg = false
 		queue_free()
 		return
 
