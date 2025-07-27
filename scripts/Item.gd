@@ -12,6 +12,22 @@ enum ItemState {
 	CONSUMED # being consumed by the slug
 }
 
+enum EggFreshnessState {
+	FRESH,
+	STALE,
+	ROTTEN
+}
+
+var freshness_state: EggFreshnessState = EggFreshnessState.FRESH
+
+func get_freshless_state() -> EggFreshnessState:
+	return freshness_state
+
+@export var time_to_stale := 10.0 # через сколько секунд яйцо станет несвежим
+@export var time_to_rotten := 15.0 # через сколько секунд оно станет гнилым
+
+var freshness_timer := 0.0
+
 var state: ItemState = ItemState.GROUND
 var current_owner: Node = null # robot or slug holding or about to hold the egg
 
@@ -21,6 +37,18 @@ var destination_pos: Vector2 = Vector2(0,0)
 
 var flight_progress = 0 # 0 - start of flight, 1 - landing
 var flight_progress_speed = 0 # Calculated from distance when throwing
+
+func update_egg_freshless(delta: float) -> void:
+	freshness_timer += delta
+	if freshness_state == EggFreshnessState.FRESH and freshness_timer >= time_to_stale:
+		freshness_state = EggFreshnessState.STALE
+		print("Яйцо начало тухнуть")
+		sprite.modulate = Color(1, 0.9, 0.6)
+	elif freshness_state == EggFreshnessState.STALE and freshness_timer >= time_to_rotten:
+		freshness_state = EggFreshnessState.ROTTEN
+		print("Яйцо стухло")
+		sprite.modulate = Color(0, 0, 0)
+
 
 func collect_from_ground(new_owner: Node) -> bool:
 	if state != ItemState.GROUND:
@@ -77,6 +105,7 @@ func _ready():
 			#sprite.texture = load("res://sprites/items/default.png")
 
 func _process(delta):
+	update_egg_freshless(delta)
 	if state == ItemState.IN_FLIGHT:
 		flight_progress += flight_progress_speed * delta
 		

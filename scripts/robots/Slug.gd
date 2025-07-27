@@ -15,6 +15,11 @@ var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs con
 var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
 var level: int = 0 # Current growth level
 
+enum EggFreshnessState {
+	FRESH,
+	
+}
+
 signal game_over
 signal level_complete
 
@@ -42,7 +47,18 @@ func receive_egg(egg: Node):
 	print("Slug received and consumed egg: ", egg.item_name)
 
 func consume_egg(egg: Node):
+	consume(egg.item_name, 1)
+	egg.state = egg.ItemState.CONSUMED
+	egg.queue_free()
+	holding_egg = null
+
+	if egg.freshness_state == egg.EggFreshnessState.ROTTEN:
+		irritation += 10
+		print("Slug consumed rotten egg! Irritation increased to: ", "%.2f" % irritation)
+		return
+
 	eggs_consumed += 1
+
 	if eggs_consumed >= game_manager.growth_levels[level]:
 		level += 1
 		if level < game_manager.egg_saturation_levels.size():
@@ -50,30 +66,19 @@ func consume_egg(egg: Node):
 		else:
 			print("Slug has reached maximum growth level!")
 			# TODO: win
-		eggs_consumed = 0  # Reset egg count after growth
-		irritation = 0  # Reset irritation on growth
-		# Reward player for growth
+		eggs_consumed = 0
+		irritation = 0  
+
 		if level < game_manager.rewards_per_level.size():
 			var reward = game_manager.rewards_per_level[level]
 			game_manager.add_coins(reward)
 
-
-	# Consume the egg based on its type
-	consume(egg.item_name, 1)
-	
-	# Set egg state to consumed
-	egg.state = egg.ItemState.CONSUMED
-	
-	# Remove the egg from the scene
-	egg.queue_free()
-	holding_egg = null
-
-	# Add coins
 	game_manager.add_coins(game_manager.egg_cost)
-	
-	# Decrease irritation when egg is consumed
+
 	irritation = max(0, irritation - irritation_decrease)
 	print("Slug consumed egg! Irritation decreased to: ", "%.2f" % irritation)
+
+
 
 func _process(delta):
 	# Increase irritation over time

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://edyto6mesfqm"]
+[gd_scene load_steps=13 format=3 uid="uid://edyto6mesfqm"]
 
 [ext_resource type="Texture2D" uid="uid://brpaiugvsu6xi" path="res://sprites/items/default.png" id="1_qrm1t"]
 [ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="2_4had2"]
+[ext_resource type="Script" uid="uid://33sewbqkp8ew" path="res://scenes/map/big_water.gd" id="2_ki5cf"]
 [ext_resource type="Texture2D" uid="uid://ppxmasra64mo" path="res://sprites/water0000.png" id="3_04uju"]
 [ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="3_b6ov8"]
-[ext_resource type="Script" uid="uid://cio257a7u0y3w" path="res://scenes/map/lake.gd" id="3_ki5cf"]
+[ext_resource type="Script" path="res://scenes/map/lake.gd" id="3_ki5cf"]
 [ext_resource type="Texture2D" uid="uid://oihwhld4lowx" path="res://sprites/landscape.png" id="4_b6ov8"]
 [ext_resource type="PackedScene" uid="uid://dq83gdrnlqhud" path="res://scenes/entities/Slug.tscn" id="5_sbr4m"]
 
@@ -34,12 +35,15 @@ point_count = 5
 [node name="Terrain" type="Node2D"]
 
 [node name="BigWater" type="TextureRect" parent="."]
-offset_left = -4349.0
-offset_top = -2619.0
-offset_right = 5609.0
-offset_bottom = 3097.0
+texture_repeat = 2
+offset_left = -2760.0
+offset_top = -1685.0
+offset_right = 25428.0
+offset_bottom = 12859.0
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_04uju")
 stretch_mode = 1
+script = ExtResource("2_ki5cf")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 texture_repeat = 2

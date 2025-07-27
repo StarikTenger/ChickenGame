@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvjenktwtbwhp"]
+[gd_scene load_steps=3 format=3 uid="uid://ha6nf2f7y52s"]
 
-[ext_resource type="Script" uid="uid://cio257a7u0y3w" path="res://scenes/map/lake.gd" id="1_8rih2"]
+[ext_resource type="Script" path="res://scenes/map/lake.gd" id="1_8rih2"]
 [ext_resource type="Texture2D" uid="uid://ppxmasra64mo" path="res://sprites/water0000.png" id="2_efoc8"]
 
 [node name="Node2D" type="Node2D"]
