@@ -54,11 +54,11 @@ func try_tossing(delta):
 	# First priority: try to toss to slugs
 	for slug in get_tree().get_nodes_in_group("slugs"):
 		if position.distance_to(slug.position) <= toss_radius:
-			if not slug.awaiting_egg:
-				# Found a valid slug target, start tossing
-				toss_egg_to(slug)
-				toss_timer = toss_delay # Reset toss timer
-				return
+			# if not slug.awaiting_egg:
+			# Found a valid slug target, start tossing
+			toss_egg_to(slug)
+			toss_timer = toss_delay # Reset toss timer
+			return
 	
 	# Second priority: try to toss to other robots
 	for robot in get_tree().get_nodes_in_group("robots"):
