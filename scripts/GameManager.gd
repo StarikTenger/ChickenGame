@@ -11,10 +11,16 @@ var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
+# Game settings, balance here
 var coins: int = 20
+var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
+var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
+var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
+var collector_bot_price: int = 10
+
 signal coins_changed()
 
-var collector_bot_price: int = 10
+
 signal collector_price_changed(price: int)
 
 var egg_cost: int = 0  # Coins awarded when slug consumes an egg

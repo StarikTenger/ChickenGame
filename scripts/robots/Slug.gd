@@ -11,9 +11,7 @@ var irritation_increase_rate: float = 1.0 # Rate of irritation increase per seco
 var irritation_decrease: float = 10 # Irritation deacrease per egg
 
 var eggs_consumed: int = 0 # Count of eggs consumed
-var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
-var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
-var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
+
 var level: int = 0 # Current growth level
 
 signal game_over
@@ -44,9 +42,9 @@ func receive_egg(egg: Node):
 
 func consume_egg(egg: Node):
 	eggs_consumed += 1
-	if eggs_consumed >= growth_levels[level]:
+	if eggs_consumed >= game_manager.growth_levels[level]:
 		level += 1
-		if level < egg_saturation_levels.size():
+		if level < game_manager.egg_saturation_levels.size():
 			print("Slug has grown to level: ", level)
 		else:
 			print("Slug has reached maximum growth level!")
@@ -54,8 +52,8 @@ func consume_egg(egg: Node):
 		eggs_consumed = 0  # Reset egg count after growth
 		irritation = 0  # Reset irritation on growth
 		# Reward player for growth
-		if level < rewards_per_level.size():
-			var reward = rewards_per_level[level]
+		if level < game_manager.rewards_per_level.size():
+			var reward = game_manager.rewards_per_level[level]
 			game_manager.add_coins(reward)
 
 
@@ -123,9 +121,9 @@ func _draw():
 	
 	# Calculate growth progress
 	var growth_progress = 0.0
-	var current_target = growth_levels[level] if level < growth_levels.size() else growth_levels[-1]
+	var current_target = game_manager.growth_levels[level] if level < game_manager.growth_levels.size() else game_manager.growth_levels[-1]
 	
-	if level < growth_levels.size():
+	if level < game_manager.growth_levels.size():
 		growth_progress = float(eggs_consumed) / float(current_target)
 	else:
 		growth_progress = 1.0  # Max level reached
@@ -142,7 +140,7 @@ func _draw():
 	
 	# Growth text
 	var growth_text = "Level %d | Eggs: %d/%d" % [level, eggs_consumed, current_target]
-	if level >= growth_levels.size():
+	if level >= game_manager.growth_levels.size():
 		growth_text = "Level %d | MAX LEVEL" % level
 	var growth_text_size = font.get_string_size(growth_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	var growth_text_pos = Vector2(-growth_text_size.x / 2, growth_bar_pos.y + bar_height + 15)
