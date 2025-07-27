@@ -46,13 +46,18 @@ func toss_to(target_owner: Node, source_position: Vector2, target_position: Vect
 
 func catch_by_receiver():
 	state = ItemState.ROBOT
-	position = current_owner.position
 	var flight_time = flight_progress / flight_progress_speed if flight_progress_speed > 0 else 0
 
 	# Check that the owner is in correct position
 	if current_owner.position.distance_to(destination_pos) > 10:
-		# TODO: break egg animation
 		print("Egg missed the receiver! Current position: ", current_owner.position, " | Expected position: ", destination_pos)
+		state = ItemState.GROUND
+		# break egg animation
+		print(sprite.sprite_frames.get_animation_names())
+		if "egg_splat" in sprite.sprite_frames.get_animation_names():
+			# Play the egg splat animation before despawning
+			sprite.play("egg_splat")
+			await sprite.animation_finished
 		queue_free()
 		return
 
@@ -62,13 +67,13 @@ func catch_by_receiver():
 
 func _ready():
 	add_to_group("items")
-	match item_name:
-		"egg":
-			sprite.texture = load("res://sprites/egg.png")
-		"egg2":
-			sprite.texture = load("res://sprites/items/egg2.png")
-		_:
-			sprite.texture = load("res://sprites/items/default.png")
+	#match item_name:
+		#"egg":
+			#sprite.texture = load("res://sprites/egg.png")
+		#"egg2":
+			#sprite.texture = load("res://sprites/items/egg2.png")
+		#_:
+			#sprite.texture = load("res://sprites/items/default.png")
 
 func _process(delta):
 	if state == ItemState.IN_FLIGHT:
