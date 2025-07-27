@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cewhi5cpokbmu"]
 
-[ext_resource type="Texture2D" uid="uid://brpaiugvsu6xi" path="res://sprites/items/default.png" id="1_a87gr"]
 [ext_resource type="Script" uid="uid://ckws840ne6c7w" path="res://scripts/robots/TrashCan.gd" id="1_v2uck"]
+[ext_resource type="Texture2D" uid="uid://cdlyinad4vk60" path="res://sprites/empty_hole.png" id="2_v2uck"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v2uck"]
 
@@ -9,7 +9,9 @@
 script = ExtResource("1_v2uck")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_a87gr")
+position = Vector2(9.53674e-07, -22)
+scale = Vector2(0.100555, 0.0862694)
+texture = ExtResource("2_v2uck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_v2uck")
