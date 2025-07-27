@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckl15loudy8ry"]
+[gd_scene load_steps=5 format=3 uid="uid://ckl15loudy8ry"]
 
-[ext_resource type="Script" uid="uid://cuibfo0f0vgfv" path="res://scripts/GameManager.gd" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://bamd0w7f7gghv" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cvs2rg1xwqi8y" path="res://scenes/map/Grid.tscn" id="2_rvslj"]
+[ext_resource type="Script" uid="uid://yy3ctpa45xm6" path="res://scenes/main_camera.gd" id="4_rarhs"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_elqb8")
@@ -14,3 +15,7 @@ script = ExtResource("1_elqb8")
 [node name="Robots" type="Node2D" parent="."]
 
 [node name="Items" type="Node2D" parent="."]
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(641, 362)
+script = ExtResource("4_rarhs")
