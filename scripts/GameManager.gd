@@ -9,7 +9,6 @@ var selected_robot: CollectorRobot = null
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
-var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
 var coins: int = 100
@@ -26,8 +25,6 @@ func _ready():
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 			print("Подписал стартового робота:", robot.name)
 	spawn_mega_consumer()
-	spawn_cluster("egg", Vector2(300, 300))
-	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
 	
 	# Подписываемся на сигнал выбора робота
 	for robot in robot_container.get_children():
@@ -124,12 +121,6 @@ func spawn_collector_bot():
 func add_coins(amount: int):
 	coins += amount
 	coins_changed.emit()
-	
-func spawn_cluster(item_name: String, position: Vector2):
-	var spawner = spawner_scene.instantiate()
-	spawner.item_name = item_name
-	spawner.global_position = position
-	add_child(spawner)
 
 func spawn_chickens(count: int):
 	var center := Vector2(640, 360)   # центр карты
