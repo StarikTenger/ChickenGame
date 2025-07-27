@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://edyto6mesfqm" path="res://scenes/map/Terrain.tscn" id="7_jlsqs"]
-[ext_resource type="PackedScene" uid="uid://8gmttfot07im" path="res://scenes/lose_screen.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" path="res://scenes/lose_screen.tscn" id="7_nxtc6"]
 
 [sub_resource type="Curve2D" id="Curve2D_c01mt"]
 _data = {
