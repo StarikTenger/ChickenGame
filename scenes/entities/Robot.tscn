@@ -1,8 +1,88 @@
-[gd_scene load_steps=6 format=3 uid="uid://gitujn07gqgc"]
+[gd_scene load_steps=15 format=3 uid="uid://gitujn07gqgc"]
 
 [ext_resource type="Script" uid="uid://3lk5rj2ta6ep" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
-[ext_resource type="Texture2D" uid="uid://b2cjh1ajhrpxt" path="res://sprites/robot_idle_pose.png" id="2_oaug8"]
 [ext_resource type="Texture2D" uid="uid://d35nvgfyrmp0u" path="res://sprites/collector_s.png" id="3_oaug8"]
+[ext_resource type="Texture2D" uid="uid://cal405jjuh2yf" path="res://sprites/robot_roll0000.png" id="3_xl53w"]
+[ext_resource type="Texture2D" uid="uid://ds0bn6u0381um" path="res://sprites/robot_roll0003.png" id="4_k4pnc"]
+[ext_resource type="Texture2D" uid="uid://k8c1rka66bgj" path="res://sprites/robot_roll0001.png" id="5_dhwuu"]
+[ext_resource type="Texture2D" uid="uid://bvu1tdymausoc" path="res://sprites/robot_roll0002.png" id="6_xrusf"]
+[ext_resource type="Texture2D" uid="uid://c0vtsepljp6pj" path="res://sprites/robot_roll0004.png" id="7_nkqiy"]
+[ext_resource type="Texture2D" uid="uid://b3317e0pabysb" path="res://sprites/robot_throw0001.png" id="8_xvv08"]
+[ext_resource type="Texture2D" uid="uid://o07abup121by" path="res://sprites/robot_throw0002.png" id="9_ridg0"]
+[ext_resource type="Texture2D" uid="uid://7s4c5nkabrhd" path="res://sprites/robot_throw0003.png" id="10_xeo27"]
+[ext_resource type="Texture2D" uid="uid://dbb1d2f2nom4" path="res://sprites/robot_throw0004.png" id="11_gqo2i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hsnwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k4pnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k4pnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k4pnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}],
+"loop": true,
+"name": &"robot_idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xl53w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dhwuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xrusf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k4pnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nkqiy")
+}],
+"loop": true,
+"name": &"robot_roll",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_xvv08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ridg0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xeo27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gqo2i")
+}],
+"loop": false,
+"name": &"robot_throw",
+"speed": 12.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlqxp"]
 radius = 17.0294
@@ -17,10 +97,11 @@ position = Vector2(7, 10)
 scale = Vector2(0.254, 0.254)
 texture = ExtResource("3_oaug8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(6, 8)
 scale = Vector2(0.09, 0.09)
-texture = ExtResource("2_oaug8")
+sprite_frames = SubResource("SpriteFrames_hsnwv")
+animation = &"robot_idle"
 
 [node name="Area2D" type="Area2D" parent="."]
 

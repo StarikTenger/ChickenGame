@@ -66,6 +66,14 @@ func try_tossing(delta):
 func toss_egg_to(target: Node):
 	if holding_egg == null:
 		return
+	
+	# Start animation
+	var sprite = get_node("Sprite2D")
+	if "robot_throw" in sprite.sprite_frames.get_animation_names():
+		if sprite.animation == "robot_throw" and sprite.is_playing():
+			sprite.frame = 0  # resets to the first frame
+		else:
+			sprite.play("robot_throw")
 	target.awaiting_egg = true
 	holding_egg.state = holding_egg.ItemState.IN_FLIGHT
 	holding_egg.current_owner = target
@@ -78,6 +86,11 @@ func toss_egg_to(target: Node):
 	var estimated_flight_time = distance / tossing_speed
 	var target_type = "slug" if target.is_in_group("slugs") else "robot"
 	print("Egg tossed to ", target_type, " at ", target.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
+	# Reset the sprite animation after tossing
+	if sprite.animation == "robot_throw":
+		await sprite.animation_finished
+		sprite.play("robot_idle")
+
 
 func _ready():
 	add_to_group("robots")
@@ -95,6 +108,11 @@ func _physics_process(delta):
 func _process(delta):
 	queue_redraw()
 	if is_moving:
+		# Animate moving if not already
+		var sprite = get_node("Sprite2D")
+		if sprite.animation != "robot_roll" or not sprite.is_playing():
+			sprite.play("robot_roll")
+		
 		# Обновляем цель агента, если нужно (если target_position изменился)
 		if nav_agent.target_position != target_position:
 			nav_agent.target_position = target_position
@@ -110,6 +128,11 @@ func _process(delta):
 			is_moving = false
 		
 		move_and_slide()
+	else:
+		# Stop moving animation if not moving
+		var sprite = get_node("Sprite2D")
+		if sprite.animation != "robot_idle" or not sprite.is_playing():
+			sprite.play("robot_idle")
 
 func receive_egg(egg: Node):
 	holding_egg = egg
