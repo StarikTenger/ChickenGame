@@ -22,8 +22,6 @@ var destination_pos: Vector2 = Vector2(0,0)
 var flight_progress = 0 # 0 - start of flight, 1 - landing
 var flight_progress_speed = 0 # Calculated from distance when throwing
 
-# TODO: egg flight animation, it should be not straight line
-
 func collect_from_ground(new_owner: Node) -> bool:
 	if state != ItemState.GROUND:
 		return false # Cannot collect if not on ground
@@ -75,4 +73,6 @@ func _process(delta):
 			catch_by_receiver()
 		else:
 			# Interpolate position during flight
-			position = source_pos.lerp(destination_pos, flight_progress)
+			var h = 100 # height of the parabolic arc
+			# Using a parabolic trajectory formula for a more natural flight path
+			position = source_pos.lerp(destination_pos, flight_progress) + Vector2(0, h * (4 * (flight_progress - 0.5) * (flight_progress - 0.5) - 1))
