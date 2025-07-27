@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckl15loudy8ry"]
+[gd_scene load_steps=6 format=3 uid="uid://ckl15loudy8ry"]
 
 [ext_resource type="Script" uid="uid://d18vymkihv04i" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cvs2rg1xwqi8y" path="res://scenes/map/Grid.tscn" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://bd7rbkp77jscu" path="res://scenes/main_camera.gd" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://edyto6mesfqm" path="res://scenes/map/Terrain.tscn" id="7_jlsqs"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_elqb8")
+
+[node name="Terrain" parent="." instance=ExtResource("7_jlsqs")]
 
 [node name="GameUI" parent="." instance=ExtResource("2_0bbpv")]
 

@@ -4,22 +4,26 @@ class_name GameManager
 @onready var robot_container: Node = $Robots
 @onready var cam := get_node("/root/Main/MainCamera")
 
+
 var selected_robot: CollectorRobot = null
 
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
-var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
 var terrain_scene := preload("res://scenes/map/Terrain.tscn")
 
 const SCENE_BOUNDS := Rect2(0, 0, 1280, 720)
 
-var coins: int = 100
-signal coins_changed()
+# Game settings, balance here
+var coins: int = 20
+var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
+var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
+var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
+var collector_bot_price: int = 10
 
-var collector_bot_price: int = 0
+signal coins_changed()
 signal collector_price_changed(price: int)
 
 var egg_cost: int = 5  # Coins awarded when slug consumes an egg
@@ -29,17 +33,11 @@ func _ready():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 			print("Подписал стартового робота:", robot.name)
-	build_terrain()
-	spawn_mega_consumer()
-	spawn_cluster("egg", Vector2(300, 300))
-	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
 	
 	# Подписываемся на сигнал выбора робота
 	for robot in robot_container.get_children():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
-	
-	spawn_chickens(5)
 
 func select_robot(robot: CollectorRobot):
 	selected_robot = robot
@@ -90,17 +88,6 @@ func spawn_mega_consumer():
 	mega.position = Vector2(640, 360)
 	mega.game_manager = self
 
-func spawn_resource_cluster(item_name: String, center: Vector2, count: int):
-	print("Spawning ", count, item_name, " at ", center)
-	for i in count:
-		var item = item_scene.instantiate()
-		item.item_name = item_name
-
-		var offset = Vector2(randf_range(-64, 64), randf_range(-64, 64))
-		item.position = center + offset
-
-		items_container.add_child(item)
-
 func spawn_collector_bot():
 	if coins < collector_bot_price:
 		print("Недостаточно монет: нужно ", collector_bot_price, ", есть ", coins)
@@ -129,12 +116,12 @@ func spawn_collector_bot():
 func add_coins(amount: int):
 	coins += amount
 	coins_changed.emit()
-	
-func spawn_cluster(item_name: String, position: Vector2):
-	var spawner = spawner_scene.instantiate()
-	spawner.item_name = item_name
-	spawner.global_position = position
-	add_child(spawner)
+
+
+func build_terrain():
+	var terrain = terrain_scene.instantiate()
+	add_child(terrain)
+	return
 
 func spawn_chickens(count: int):
 	var center := Vector2(640, 360)   # центр карты
@@ -148,8 +135,7 @@ func spawn_chickens(count: int):
 		var attempts := 0
 
 		while true:
-			pos = Vector2(randf_range(SCENE_BOUNDS.position.x, SCENE_BOUNDS.end.x),
-			  randf_range(SCENE_BOUNDS.position.y, SCENE_BOUNDS.end.y))
+			pos = Vector2(randf_range(0, 1280), randf_range(0, 720))
 
 			# Проверка расстояния от центра
 			if pos.distance_to(center) < forbidden_radius:
@@ -179,8 +165,3 @@ func spawn_chickens(count: int):
 			placed_chickens.append(pos)
 		else:
 			print("Не удалось разместить курицу ", i)
-			
-func build_terrain():
-	var terrain = terrain_scene.instantiate()
-	add_child(terrain)
-	return

@@ -47,10 +47,14 @@ func try_tossing(delta):
 	if is_moving or is_ghost:
 		return
 	for slug in get_tree().get_nodes_in_group("slugs"):
-		if position.distance_to(slug.position) <= toss_radius and not slug.awaiting_egg:
+		if position.distance_to(slug.position) <= toss_radius:
+			# if not slug.awaiting_egg:
+			# Found a valid slug target, start tossing
 			toss_egg_to(slug)
-			toss_timer = toss_delay
+			toss_timer = toss_delay # Reset toss timer
 			return
+	
+	# Second priority: try to toss to other robots
 	for robot in get_tree().get_nodes_in_group("robots"):
 		if robot == self or robot.is_moving or robot.is_ghost:
 			continue
@@ -89,6 +93,7 @@ func _physics_process(delta):
 	try_tossing(delta)
 
 func _process(delta):
+	queue_redraw()
 	if is_moving:
 		# Обновляем цель агента, если нужно (если target_position изменился)
 		if nav_agent.target_position != target_position:
@@ -115,8 +120,13 @@ func receive_egg(egg: Node):
 func _draw():
 	if is_ghost:
 		return
-	draw_arc(Vector2.ZERO, collect_radius, 0, TAU, 64, Color.GREEN, 2.0)
-	if toss_radius != collect_radius:
+	
+	# Draw collection radius (inner circle)
+	if selection_frame.visible:
+		draw_arc(Vector2.ZERO, collect_radius, 0, TAU, 64, Color.GREEN, 2.0)
+	
+	# Draw toss radius (outer circle) - only if different from collect radius
+	if toss_radius != collect_radius and selection_frame.visible:
 		draw_arc(Vector2.ZERO, toss_radius, 0, TAU, 64, Color.BLUE, 2.0)
 	var coord_text = "(%d, %d)" % [int(position.x), int(position.y)]
 	var font = ThemeDB.fallback_font

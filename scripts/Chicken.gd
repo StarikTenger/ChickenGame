@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var path_speed := 0.002   # скорость вдоль кривой [0..1]/сек
 @export var move_radius := 100.0       # Радиус гуляния
 @export var speed := 40.0              # Скорость
 @export var egg_interval := 5.0        # Раз в сколько секунд откладывает яйца
@@ -7,6 +8,7 @@ extends CharacterBody2D
 @export var egg_check_radius := 128.0
 @export var item_scene := preload("res://scenes/items/Item.tscn")
 
+var path_reference: PathFollow2D  # Reference to PathFollow2D for home position
 var home_position: Vector2
 var target_position: Vector2
 
@@ -16,12 +18,38 @@ var travel_timeout := 0.0
 var travel_time_passed := 0.0
 
 func _ready():
-	home_position = global_position
+	# Find PathFollow2D inside Route sibling node
+	var parent = get_parent()
+	if parent:
+		for child in parent.get_children():
+			if child.name == "Route" or child.has_method("get_children"):
+				# Look inside the Route node for PathFollow2D
+				for grandchild in child.get_children():
+					if grandchild is PathFollow2D:
+						path_reference = grandchild
+						break
+				if path_reference:
+					break
+	
+	if not path_reference:
+		print("Warning: No PathFollow2D found inside Route sibling, chicken will stay at spawn position")
+		home_position = global_position
+	else:
+		home_position = path_reference.global_position
+		print("Found PathFollow2D inside Route:", path_reference.name)
+	
 	pick_new_target()
 	egg_timer.wait_time = egg_interval
 	egg_timer.start()
 
 func _process(delta):
+	# Update path reference position if available
+	if path_reference:
+		path_reference.progress_ratio = fmod(path_reference.progress_ratio + delta * path_speed, 1.0)
+		# Update home position to follow the path reference
+		home_position = path_reference.global_position
+	
+	# Move chicken independently towards target position
 	var dir = (target_position - global_position).normalized()
 	velocity = dir * speed
 	var chicken_sprite = $Sprite2D

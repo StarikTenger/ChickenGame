@@ -64,7 +64,7 @@ script = ExtResource("1_k2oj2")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
-scale = Vector2(0.056, 0.056)
+scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_vxjn0")
 animation = &"slug_idle"
 
