@@ -22,9 +22,11 @@ var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs con
 var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
 var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
 var collector_bot_price: int = 10
+var collector_lr_bot_price: int = 15
 
 signal coins_changed()
 signal collector_price_changed(price: int)
+signal long_ranged_price_changed(price: int)
 
 var egg_cost: int = 5  # Coins awarded when slug consumes an egg
 

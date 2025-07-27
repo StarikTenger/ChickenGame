@@ -1,0 +1,118 @@
+[gd_scene load_steps=15 format=3 uid="uid://di57dcvq8tpma"]
+
+[ext_resource type="Script" uid="uid://ewtbcoctqwu1" path="res://scenes/entities/long_ranged_robot.gd" id="1_j7glo"]
+[ext_resource type="Texture2D" uid="uid://d35nvgfyrmp0u" path="res://sprites/collector_s.png" id="2_j7glo"]
+[ext_resource type="Texture2D" uid="uid://cal405jjuh2yf" path="res://sprites/robot_roll0000.png" id="3_j8m61"]
+[ext_resource type="Texture2D" uid="uid://ds0bn6u0381um" path="res://sprites/robot_roll0003.png" id="4_fsj4q"]
+[ext_resource type="Texture2D" uid="uid://k8c1rka66bgj" path="res://sprites/robot_roll0001.png" id="5_siiak"]
+[ext_resource type="Texture2D" uid="uid://bvu1tdymausoc" path="res://sprites/robot_roll0002.png" id="6_dl7ji"]
+[ext_resource type="Texture2D" uid="uid://c0vtsepljp6pj" path="res://sprites/robot_roll0004.png" id="7_2uaik"]
+[ext_resource type="Texture2D" uid="uid://b3317e0pabysb" path="res://sprites/robot_throw0001.png" id="8_jtemp"]
+[ext_resource type="Texture2D" uid="uid://o07abup121by" path="res://sprites/robot_throw0002.png" id="9_p1iyv"]
+[ext_resource type="Texture2D" uid="uid://7s4c5nkabrhd" path="res://sprites/robot_throw0003.png" id="10_c1xr4"]
+[ext_resource type="Texture2D" uid="uid://dbb1d2f2nom4" path="res://sprites/robot_throw0004.png" id="11_8qijp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hsnwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fsj4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fsj4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fsj4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}],
+"loop": true,
+"name": &"robot_idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_j8m61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_siiak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dl7ji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fsj4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2uaik")
+}],
+"loop": true,
+"name": &"robot_roll",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jtemp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1iyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c1xr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8qijp")
+}],
+"loop": false,
+"name": &"robot_throw",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlqxp"]
+radius = 17.0294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1r7id"]
+
+[node name="LongRangedRobot" type="CharacterBody2D"]
+script = ExtResource("1_j7glo")
+
+[node name="SelectionFrame" type="Sprite2D" parent="."]
+position = Vector2(7, 10)
+scale = Vector2(0.254, 0.254)
+texture = ExtResource("2_j7glo")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, 8)
+scale = Vector2(0.09, 0.09)
+sprite_frames = SubResource("SpriteFrames_hsnwv")
+animation = &"robot_idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 10)
+shape = SubResource("CircleShape2D_qlqxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 11)
+shape = SubResource("CircleShape2D_1r7id")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
