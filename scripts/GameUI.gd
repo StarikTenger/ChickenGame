@@ -96,7 +96,7 @@ func update_collector_ui():
 	print("Обновление UI: монет =", gm.coins, ", цена =", gm.collector_bot_price)
 	var price = gm.collector_bot_price
 	var can_afford = gm.coins >= price
-	coins_label.text = "Balance: " + str(gm.coins) + "$"
+	coins_label.text = str(gm.coins) 
 
 	collector_label.text = "Tossing Robot (" + str(price) + "$)"
 	if can_afford:

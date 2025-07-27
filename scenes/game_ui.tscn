@@ -109,15 +109,19 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -147.0
+offset_left = -138.0
+offset_top = 89.0
+offset_right = -72.0
+offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/CoinsInfo"]
-layout_mode = 2
-texture = ExtResource("6_djwj0")
-stretch_mode = 3
-
 [node name="CoinsLabel" type="Label" parent="Control/CoinsInfo"]
 layout_mode = 2
+tooltip_text = "jhgf"
 horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(1177, 49)
+scale = Vector2(0.404296, 0.404296)
+texture = ExtResource("6_djwj0")
