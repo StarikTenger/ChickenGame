@@ -54,6 +54,14 @@ func try_tossing(delta):
 			toss_timer = toss_delay # Reset toss timer
 			return
 	
+	for can in get_tree().get_nodes_in_group("trash_cans"):
+		if position.distance_to(can.position) <= toss_radius:
+			# if not slug.awaiting_egg:
+			# Found a valid slug target, start tossing
+			toss_egg_to(can)
+			toss_timer = toss_delay # Reset toss timer
+			return
+	
 	# Second priority: try to toss to other robots
 	for robot in get_tree().get_nodes_in_group("robots"):
 		if robot == self or robot.is_moving or robot.is_ghost:
@@ -76,7 +84,7 @@ func toss_egg_to(target: Node):
 	holding_egg.flight_progress_speed = tossing_speed / distance
 	holding_egg = null
 	var estimated_flight_time = distance / tossing_speed
-	var target_type = "slug" if target.is_in_group("slugs") else "robot"
+	var target_type = "slug" if target.is_in_group("slugs") else "can" if target.is_in_group("trash_cans") else "robot"
 	print("Egg tossed to ", target_type, " at ", target.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
 
 func _ready():

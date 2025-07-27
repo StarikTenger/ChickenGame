@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cewhi5cpokbmu"]
+
+[ext_resource type="Texture2D" uid="uid://brpaiugvsu6xi" path="res://sprites/items/default.png" id="1_a87gr"]
+[ext_resource type="Script" uid="uid://ckws840ne6c7w" path="res://scripts/robots/TrashCan.gd" id="1_v2uck"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v2uck"]
+
+[node name="TrashCan" type="Node2D"]
+script = ExtResource("1_v2uck")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a87gr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_v2uck")

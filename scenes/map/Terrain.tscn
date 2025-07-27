@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://edyto6mesfqm"]
+[gd_scene load_steps=13 format=3 uid="uid://edyto6mesfqm"]
 
 [ext_resource type="Texture2D" uid="uid://brpaiugvsu6xi" path="res://sprites/items/default.png" id="1_qrm1t"]
 [ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="2_4had2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cio257a7u0y3w" path="res://scenes/map/lake.gd" id="3_ki5cf"]
 [ext_resource type="Texture2D" uid="uid://oihwhld4lowx" path="res://sprites/landscape.png" id="4_b6ov8"]
 [ext_resource type="PackedScene" uid="uid://dq83gdrnlqhud" path="res://scenes/entities/Slug.tscn" id="5_sbr4m"]
+[ext_resource type="PackedScene" uid="uid://cewhi5cpokbmu" path="res://scenes/entities/TrashCan.tscn" id="8_ki5cf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sbr4m"]
 vertices = PackedVector2Array(1250.63, 75.7266, 1466.83, 165.023, 1343.88, 175.898, 847.117, 111.938, 1169.69, 54.0078, 1225.08, 192.562, 1703.24, 261.102, 2077.13, -146.898, 1792.88, 1102.25, 1678.21, 396.594, 1442.4, 712.102, 1385.53, 834.562, 1485.24, 505.219, 1563.39, 446.602, 1354.42, 632, 1404.18, -118.938, 1372.09, -208.172, 1592.54, 193.078, 1386.51, -21.6797, 1503.78, 180.688, 1145.96, 262.891, 833.953, 198.312, 1337.32, 506.422, 1181.82, 615.438, 1341.17, 36.8828, 440.781, 1129.18, 1271.83, 838.312, 1114.65, 840.273, 867.898, 939.812, 1221.9, 413.422, 999.609, 640.531, 1086.83, -322.781, 1282.57, -234.406, 1201.59, -200.344, 1147.62, -165.953, 1.15625, -17.7969, 1124.7, -49.0078, 727.406, 8.85938, 614.742, 19.1016, 777.906, 302.977, 765.523, 266.609, 765.758, 259.672, 1172.26, 357.867, 819.969, 367.609, 801.578, 47.8906, 840.562, 457.719, 732.773, 735.422, 791.594, 543.422, 677.07, 548.391, 576.047, 538.82, 670.867, 848.703, 423.008, 493.352, 537.961, 39.0781, 460.547, 63.4688, 345.727, 127.531, 332.508, 260.969, 344.82, 387.508, 715.891, 959.641, 964.852, 869.117)
@@ -141,3 +142,6 @@ skew = -0.00487781
 
 [node name="MegaConsumer" parent="." instance=ExtResource("5_sbr4m")]
 position = Vector2(734, 436)
+
+[node name="TrashCan" parent="." instance=ExtResource("8_ki5cf")]
+position = Vector2(796, -168)
