@@ -9,7 +9,6 @@ var selected_robot: CollectorRobot = null
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
-var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
 var terrain_scene := preload("res://scenes/map/Terrain.tscn")
