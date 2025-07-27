@@ -6,6 +6,8 @@ extends StaticBody2D
 func _ready():
 	poly2d.polygon = collision.polygon
 	poly2d.position = collision.position
+	poly2d.texture = water_textures[0]
+	poly2d.scale = collision.scale
 	poly2d.texture_scale = Vector2(1.0, 1.0) * 4.0
 	poly2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 
