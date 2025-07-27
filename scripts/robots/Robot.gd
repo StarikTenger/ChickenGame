@@ -113,6 +113,7 @@ func _physics_process(delta):
 	try_tossing(delta)
 
 func _process(delta):
+	queue_redraw()
 	if is_moving:
 		var direction = (target_position - position).normalized()
 		velocity = direction * speed
@@ -135,10 +136,11 @@ func _draw():
 		return
 	
 	# Draw collection radius (inner circle)
-	draw_arc(Vector2.ZERO, collect_radius, 0, TAU, 64, Color.GREEN, 2.0)
+	if selection_frame.visible:
+		draw_arc(Vector2.ZERO, collect_radius, 0, TAU, 64, Color.GREEN, 2.0)
 	
 	# Draw toss radius (outer circle) - only if different from collect radius
-	if toss_radius != collect_radius:
+	if toss_radius != collect_radius and selection_frame.visible:
 		draw_arc(Vector2.ZERO, toss_radius, 0, TAU, 64, Color.BLUE, 2.0)
 	
 	# Draw coordinates above the robot
