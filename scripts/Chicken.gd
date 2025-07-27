@@ -14,6 +14,9 @@ var target_position: Vector2
 
 @onready var egg_timer := $EggTimer
 
+var travel_timeout := 0.0
+var travel_time_passed := 0.0
+
 func _ready():
 	# Find PathFollow2D inside Route sibling node
 	var parent = get_parent()
@@ -54,7 +57,13 @@ func _process(delta):
 		chicken_sprite.scale.x = - sign(velocity.x) * abs(chicken_sprite.scale.x)
 	move_and_slide()
 
+	# Если достигли цели, выбираем новую 
 	if global_position.distance_to(target_position) < 10:
+		pick_new_target()
+	
+	# Где-то застряли -- тоже выбираем новую цель
+	travel_time_passed += delta
+	if travel_time_passed > travel_timeout:
 		pick_new_target()
 
 func pick_new_target():
@@ -62,6 +71,10 @@ func pick_new_target():
 	var radius = randf_range(20, move_radius)
 	var offset = Vector2(cos(angle), sin(angle)) * radius
 	target_position = home_position + offset
+	
+	var distance = global_position.distance_to(target_position)
+	travel_timeout = distance / speed
+	travel_time_passed = 0.0
 
 func _on_egg_timer_timeout() -> void:
 	# Проверка яиц поблизости

@@ -9,7 +9,12 @@ var selected_robot: CollectorRobot = null
 @onready var items_container := get_node("Items")
 var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
+var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
+
+var terrain_scene := preload("res://scenes/map/Terrain.tscn")
+
+const SCENE_BOUNDS := Rect2(0, 0, 1280, 720)
 
 # Game settings, balance here
 var coins: int = 20
@@ -19,11 +24,9 @@ var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth 
 var collector_bot_price: int = 10
 
 signal coins_changed()
-
-
 signal collector_price_changed(price: int)
 
-var egg_cost: int = 0  # Coins awarded when slug consumes an egg
+var egg_cost: int = 5  # Coins awarded when slug consumes an egg
 
 func _ready():
 	for robot in get_tree().get_nodes_in_group("robots"):
@@ -36,9 +39,6 @@ func _ready():
 	for robot in robot_container.get_children():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
-	
-	spawn_chickens(0)
-
 
 func select_robot(robot: CollectorRobot):
 	selected_robot = robot
@@ -89,17 +89,6 @@ func spawn_mega_consumer():
 	mega.position = Vector2(640, 360)
 	mega.game_manager = self
 
-func spawn_resource_cluster(item_name: String, center: Vector2, count: int):
-	print("Spawning ", count, item_name, " at ", center)
-	for i in count:
-		var item = item_scene.instantiate()
-		item.item_name = item_name
-
-		var offset = Vector2(randf_range(-64, 64), randf_range(-64, 64))
-		item.position = center + offset
-
-		items_container.add_child(item)
-
 func spawn_collector_bot():
 	if coins < collector_bot_price:
 		print("Недостаточно монет: нужно ", collector_bot_price, ", есть ", coins)
@@ -128,6 +117,7 @@ func spawn_collector_bot():
 func add_coins(amount: int):
 	coins += amount
 	coins_changed.emit()
+
 
 func spawn_chickens(count: int):
 	var center := Vector2(640, 360)   # центр карты
