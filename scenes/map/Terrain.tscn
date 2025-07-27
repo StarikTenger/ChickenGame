@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://edyto6mesfqm"]
+[gd_scene load_steps=17 format=3 uid="uid://edyto6mesfqm"]
 
 [ext_resource type="Texture2D" uid="uid://brpaiugvsu6xi" path="res://sprites/items/default.png" id="1_qrm1t"]
 [ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="2_4had2"]
-[ext_resource type="Script" uid="uid://33sewbqkp8ew" path="res://scenes/map/big_water.gd" id="2_ki5cf"]
+[ext_resource type="Script" path="res://scenes/map/big_water.gd" id="2_ki5cf"]
 [ext_resource type="Texture2D" uid="uid://ppxmasra64mo" path="res://sprites/water0000.png" id="3_04uju"]
 [ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="3_b6ov8"]
-[ext_resource type="Script" path="res://scenes/map/lake.gd" id="3_ki5cf"]
+[ext_resource type="Script" uid="uid://cio257a7u0y3w" path="res://scenes/map/lake.gd" id="3_ki5cf"]
 [ext_resource type="Texture2D" uid="uid://oihwhld4lowx" path="res://sprites/landscape.png" id="4_b6ov8"]
 [ext_resource type="PackedScene" uid="uid://dq83gdrnlqhud" path="res://scenes/entities/Slug.tscn" id="5_sbr4m"]
 
@@ -28,7 +28,31 @@ sources/0 = SubResource("TileSetAtlasSource_qrm1t")
 
 [sub_resource type="Curve2D" id="Curve2D_sbr4m"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 634.802, 41.1706, 0, 0, 0, 0, 963.207, 31.535, 0, 0, 0, 0, 998.756, 228.628, 0, 0, 0, 0, 621.26, 324.985, 0, 0, 0, 0, 634.802, 42.0466)
+"points": PackedVector2Array(0, 0, 0, 0, 397.809, 72.7056, 0, 0, 0, 0, 451.133, 42.0466, 0, 0, 0, 0, 578.94, 16.6435, 0, 0, 0, 0, 677.969, -24.5272, 0, 0, 0, 0, 764.302, -37.6668, 0, 0, 0, 0, 911.576, -42.0466)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_ki5cf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 316.555, 16.6435, 0, 0, 0, 0, 418.123, 36.7908, 0, 0, 0, 0, 512.074, 75.3336, 0, 0, 0, 0, 551.855, 155.923, 0, 0, 0, 0, 583.515, 198.38, 0, 0, 0, 0, 632.263, 258.411, 0, 0, 0, 0, 555.336, 366.425, 0, 0, 0, 0, 360.568, 411.273, 0, 0, 0, 0, 224.297, 418.229, 0, 0, 0, 0, 71.0979, 437.358, 0, 0, 0, 0, -43.1665, 439.097, 0, 0, 0, 0, -147.274, 444.314, 0, 0, 0, 0, -203.137, 366.059, 0, 0, 0, 0, -180.284, 246.068, 0, 0, 0, 0, -128.653, 173.9, 0, 0, 0, 0, -19.4673, 99.9923)
+}
+point_count = 16
+
+[sub_resource type="Curve2D" id="Curve2D_gha1m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -153.199, -34.7799, 0, 0, 0, 0, 5.07837, 66.9514, 0, 0, 0, 0, 135.252, 56.9606, 0, 0, 0, 0, 496.839, 87.8194, 0, 0, 0, 0, 542.544, 145.206, 0, 0, 0, 0, 551.008, 284.326, 0, 0, 0, 0, 490.067, 379.101, 0, 0, 0, 0, 407.12, 456.487)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_3nucc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -548.469, 716.467, 0, 0, 0, 0, -583.172, 616.474, 0, 0, 0, 0, -657.655, 484.311, 0, 0, 0, 0, -705.054, 321.714, 0, 0, 0, 0, -761.763, 181.725, 0, 0, 0, 0, -743.142, 106.948, 0, 0, 0, 0, -710.132, 17.39, 0, 0, 0, 0, -655.963, -53.9089)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_llhir"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -551.855, 173.9, 0, 0, 0, 0, -589.097, 55.6479, 0, 0, 0, 0, -685.587, 55.6479, 0, 0, 0, 0, -680.508, 169.552, 0, 0, 0, 0, -562.012, 179.117)
 }
 point_count = 5
 
@@ -121,6 +145,9 @@ position = Vector2(302, -519)
 scale = Vector2(0.682901, 1.16076)
 polygon = PackedVector2Array(1242, 227, 1275, 281, 1254, 349, 1204, 387, 1101, 413, 1025, 401, 976, 335, 1002, 257, 1058, 236, 1155, 212)
 
+[node name="MegaConsumer" parent="." instance=ExtResource("5_sbr4m")]
+position = Vector2(734, 436)
+
 [node name="ChickenNPath" type="Node" parent="."]
 
 [node name="Route" type="Path2D" parent="ChickenNPath"]
@@ -129,8 +156,8 @@ scale = Vector2(1.18147, 1.14159)
 curve = SubResource("Curve2D_sbr4m")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath/Route"]
-position = Vector2(634.802, 41.1706)
-rotation = -0.0293322
+position = Vector2(397.809, 72.7056)
+rotation = -0.521807
 
 [node name="Sprite2D" type="Sprite2D" parent="ChickenNPath/Route/PathFollow2D"]
 position = Vector2(0.870659, 1.50334)
@@ -138,10 +165,95 @@ scale = Vector2(0.0812312, 0.0849506)
 texture = ExtResource("2_4had2")
 
 [node name="Chicken" parent="ChickenNPath" instance=ExtResource("3_b6ov8")]
-position = Vector2(251, -32)
+position = Vector2(24, -14)
 rotation = -0.0688565
 scale = Vector2(1.18127, 1.1418)
 skew = -0.00487781
 
-[node name="MegaConsumer" parent="." instance=ExtResource("5_sbr4m")]
-position = Vector2(734, 436)
+[node name="ChickenNPath2" type="Node" parent="."]
+
+[node name="Route" type="Path2D" parent="ChickenNPath2"]
+position = Vector2(618, 427)
+scale = Vector2(1.18147, 1.15009)
+curve = SubResource("Curve2D_ki5cf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath2/Route"]
+position = Vector2(316.555, 16.6435)
+rotation = 0.19582
+
+[node name="Sprite2D" type="Sprite2D" parent="ChickenNPath2/Route/PathFollow2D"]
+position = Vector2(0.870659, 1.50334)
+scale = Vector2(0.0812312, 0.0849506)
+texture = ExtResource("2_4had2")
+
+[node name="Chicken" parent="ChickenNPath2" instance=ExtResource("3_b6ov8")]
+position = Vector2(975, 444)
+rotation = -0.0688565
+scale = Vector2(1.18127, 1.1418)
+skew = -0.00487781
+
+[node name="ChickenNPath3" type="Node" parent="."]
+
+[node name="Route" type="Path2D" parent="ChickenNPath3"]
+position = Vector2(955, -11)
+scale = Vector2(1.18147, 1.15009)
+curve = SubResource("Curve2D_gha1m")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath3/Route"]
+position = Vector2(-153.199, -34.7799)
+rotation = 0.571255
+
+[node name="Sprite2D" type="Sprite2D" parent="ChickenNPath3/Route/PathFollow2D"]
+position = Vector2(0.870659, 1.50334)
+scale = Vector2(0.0812312, 0.0849506)
+texture = ExtResource("2_4had2")
+
+[node name="Chicken" parent="ChickenNPath3" instance=ExtResource("3_b6ov8")]
+position = Vector2(747, -67)
+rotation = -0.0688565
+scale = Vector2(1.18127, 1.1418)
+skew = -0.00487781
+
+[node name="ChickenNPath4" type="Node" parent="."]
+
+[node name="Route" type="Path2D" parent="ChickenNPath4"]
+position = Vector2(955, -11)
+scale = Vector2(1.18147, 1.15009)
+curve = SubResource("Curve2D_3nucc")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath4/Route"]
+position = Vector2(-548.469, 716.467)
+rotation = -1.90484
+
+[node name="Sprite2D" type="Sprite2D" parent="ChickenNPath4/Route/PathFollow2D"]
+position = Vector2(0.870659, 1.50334)
+scale = Vector2(0.0812312, 0.0849506)
+texture = ExtResource("2_4had2")
+
+[node name="Chicken" parent="ChickenNPath4" instance=ExtResource("3_b6ov8")]
+position = Vector2(326, 843)
+rotation = -0.0688565
+scale = Vector2(1.18127, 1.1418)
+skew = -0.00487781
+
+[node name="ChickenNPath5" type="Node" parent="."]
+
+[node name="Route" type="Path2D" parent="ChickenNPath5"]
+position = Vector2(2245, -224)
+scale = Vector2(1.18147, 1.15009)
+curve = SubResource("Curve2D_llhir")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath5/Route"]
+position = Vector2(-551.855, 173.9)
+rotation = -1.8759
+
+[node name="Sprite2D" type="Sprite2D" parent="ChickenNPath5/Route/PathFollow2D"]
+position = Vector2(0.870659, 1.50334)
+scale = Vector2(0.0812312, 0.0849506)
+texture = ExtResource("2_4had2")
+
+[node name="Chicken" parent="ChickenNPath5" instance=ExtResource("3_b6ov8")]
+position = Vector2(1592, -22)
+rotation = -0.0688565
+scale = Vector2(1.18127, 1.1418)
+skew = -0.00487781
