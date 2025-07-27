@@ -48,6 +48,8 @@ func try_tossing(delta):
 		return
 	if holding_egg == null:
 		return # No egg to toss
+	if is_moving or is_ghost:
+		return # Cannot toss while moving or if ghost
 	
 	# First priority: try to toss to slugs
 	for slug in get_tree().get_nodes_in_group("slugs"):
@@ -62,6 +64,8 @@ func try_tossing(delta):
 	for robot in get_tree().get_nodes_in_group("robots"):
 		if robot == self:
 			continue # Don't toss to self
+		if robot.is_moving:
+			continue # Don't toss to moving robots
 		if robot.is_ghost:
 			continue # Don't toss to ghost robots
 		if position.distance_to(robot.position) <= toss_radius:
