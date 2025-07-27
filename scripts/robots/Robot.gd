@@ -70,10 +70,31 @@ func toss_egg_to(target: Node):
 	# Start animation
 	var sprite = get_node("Sprite2D")
 	if "robot_throw" in sprite.sprite_frames.get_animation_names():
-		if sprite.animation == "robot_throw" and sprite.is_playing():
+		if sprite.is_playing() and sprite.animation == "robot_throw":
+			print("RESET THROW ANIMATION")
 			sprite.frame = 0  # resets to the first frame
 		else:
+			print("START THROW ANIMATION")
+			holding_egg.visible = false  # Hide egg during animation
 			sprite.play("robot_throw")
+	
+	# Wait for the animation before tossing
+	if sprite.animation == "robot_throw":
+		print("THROW ANIMATION...")
+		await sprite.animation_finished
+		#sprite.play("robot_idle")
+	else:
+		print("THROW ANIMATION WAS CANCELED???")
+		print(sprite.animation)
+	
+	if holding_egg == null:
+		return
+	
+	# Rotate the egg to match the end of the animation
+	holding_egg.rotation = -0.7 #-120*180/3.14
+	holding_egg.tossing_dir = randi() % 2 * 2 - 1
+	holding_egg.visible = true  # Show egg after animation
+			
 	target.awaiting_egg = true
 	holding_egg.state = holding_egg.ItemState.IN_FLIGHT
 	holding_egg.current_owner = target
@@ -86,10 +107,7 @@ func toss_egg_to(target: Node):
 	var estimated_flight_time = distance / tossing_speed
 	var target_type = "slug" if target.is_in_group("slugs") else "robot"
 	print("Egg tossed to ", target_type, " at ", target.position, " | Distance: ", distance, " | Flight time: ", "%.2f" % estimated_flight_time, "s")
-	# Reset the sprite animation after tossing
-	if sprite.animation == "robot_throw":
-		await sprite.animation_finished
-		sprite.play("robot_idle")
+
 
 
 func _ready():
@@ -131,7 +149,7 @@ func _process(delta):
 	else:
 		# Stop moving animation if not moving
 		var sprite = get_node("Sprite2D")
-		if sprite.animation != "robot_idle" or not sprite.is_playing():
+		if (sprite.animation != "robot_idle" and sprite.animation != "robot_throw") or not sprite.is_playing():
 			sprite.play("robot_idle")
 
 func receive_egg(egg: Node):

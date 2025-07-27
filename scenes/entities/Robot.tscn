@@ -101,7 +101,9 @@ texture = ExtResource("3_oaug8")
 position = Vector2(6, 8)
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_hsnwv")
-animation = &"robot_idle"
+animation = &"robot_throw"
+frame = 3
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

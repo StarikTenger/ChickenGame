@@ -2,6 +2,8 @@ extends Node2D
 class_name Item
 
 @export var item_name: String = "egg"
+# Used for rotation in air - set by robot
+@export var tossing_dir: float = 1.0
 
 @onready var sprite := $Sprite2D
 
@@ -113,6 +115,7 @@ func _ready():
 func _process(delta):
 	update_egg_freshless(delta)
 	if state == ItemState.IN_FLIGHT:
+		sprite.rotation += tossing_dir * delta
 		flight_progress += flight_progress_speed * delta
 		
 		if flight_progress >= 1.0:
