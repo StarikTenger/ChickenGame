@@ -33,8 +33,6 @@ func _ready():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 			print("Подписал стартового робота:", robot.name)
-	build_terrain()
-	spawn_mega_consumer()
 	
 	# Подписываемся на сигнал выбора робота
 	for robot in robot_container.get_children():

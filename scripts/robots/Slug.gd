@@ -1,6 +1,6 @@
 extends Node2D
 
-var game_manager: Node
+@onready var game_manager: Node = get_node("/root/Main")
 
 var awaiting_egg: bool = false # If true, waiting for egg to arrive
 var holding_egg: Node = null # Reference to the egg being delivered
