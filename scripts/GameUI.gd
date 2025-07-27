@@ -55,12 +55,12 @@ func try_place_bot(pos: Vector2):
 		ghost = null
 	
 	if not is_position_valid(pos):
-		show_feedback("Нельзя построить здесь!")
+		show_feedback("You can not spawn it here")
 		return
 	
 	var price = gm.collector_bot_price
 	if gm.coins < price:
-		show_feedback("Недостаточно монет!")
+		show_feedback("Not enough money")
 		return
 	
 	var bot = collector_scene.instantiate()
