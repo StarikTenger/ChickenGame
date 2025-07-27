@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cujfp7ibhtujw"]
 
-[ext_resource type="Script" uid="uid://b0ql0olnl3rh3" path="res://scripts/Chicken.gd" id="1_4c2k2"]
-[ext_resource type="Texture2D" uid="uid://ddaquit6dqxgw" path="res://sprites/chicken_idle_pose_left.png" id="2_k72xk"]
+[ext_resource type="Script" uid="uid://b0rdh4eskl702" path="res://scripts/Chicken.gd" id="1_4c2k2"]
+[ext_resource type="Texture2D" uid="uid://dotss4wtf8fpu" path="res://sprites/chicken_idle_pose_left.png" id="2_k72xk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k72xk"]
 

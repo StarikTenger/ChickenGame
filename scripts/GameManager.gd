@@ -12,6 +12,10 @@ var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var spawner_scene := preload("res://scenes/ClusterSpawner.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
+var terrain_scene := preload("res://scenes/map/Terrain.tscn")
+
+const SCENE_BOUNDS := Rect2(0, 0, 1280, 720)
+
 var coins: int = 100
 signal coins_changed()
 
@@ -25,6 +29,7 @@ func _ready():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 			print("Подписал стартового робота:", robot.name)
+	build_terrain()
 	spawn_mega_consumer()
 	spawn_cluster("egg", Vector2(300, 300))
 	#spawn_resource_cluster("egg", Vector2(200, 300), 10)
@@ -143,7 +148,8 @@ func spawn_chickens(count: int):
 		var attempts := 0
 
 		while true:
-			pos = Vector2(randf_range(0, 1280), randf_range(0, 720))
+			pos = Vector2(randf_range(SCENE_BOUNDS.position.x, SCENE_BOUNDS.end.x),
+			  randf_range(SCENE_BOUNDS.position.y, SCENE_BOUNDS.end.y))
 
 			# Проверка расстояния от центра
 			if pos.distance_to(center) < forbidden_radius:
@@ -173,3 +179,8 @@ func spawn_chickens(count: int):
 			placed_chickens.append(pos)
 		else:
 			print("Не удалось разместить курицу ", i)
+			
+func build_terrain():
+	var terrain = terrain_scene.instantiate()
+	add_child(terrain)
+	return
