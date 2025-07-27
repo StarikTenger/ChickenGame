@@ -8,7 +8,6 @@ func _ready():
 	hide()  # Скрываем до проигрыша
 
 func show_game_over():
-	label.text = "Вы проиграли"
 	visible = true
 	Engine.time_scale = 0.0
 
