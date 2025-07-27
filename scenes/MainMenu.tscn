@@ -20,9 +20,10 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_2wh52")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(621, 286)
+position = Vector2(620.889, 374.75)
 scale = Vector2(0.294213, 0.294213)
 texture = ExtResource("3_l72w3")
 
@@ -33,10 +34,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -421.0
-offset_top = -66.0
-offset_right = 413.0
-offset_bottom = 229.0
+offset_left = -430.0
+offset_top = 68.0
+offset_right = 404.0
+offset_bottom = 363.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 60
@@ -57,6 +58,6 @@ layout_mode = 2
 text = "Play"
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/CenterContainer"]
-position = Vector2(423, 53)
+position = Vector2(415, 50)
 scale = Vector2(0.636364, 0.558824)
 texture = ExtResource("5_826wr")
