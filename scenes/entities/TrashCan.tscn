@@ -15,3 +15,10 @@ texture = ExtResource("2_v2uck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_v2uck")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -37.0
+offset_top = -86.0
+offset_right = 38.0
+offset_bottom = -63.0
+text = "Trash can"
