@@ -14,12 +14,12 @@ script = ExtResource("1_lx7qx")
 
 [node name="SelectionFrame" type="Sprite2D" parent="."]
 position = Vector2(7, 10)
-scale = Vector2(0.157812, 0.157812)
+scale = Vector2(0.254, 0.254)
 texture = ExtResource("3_oaug8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(6, 8)
-scale = Vector2(0.056, 0.056)
+scale = Vector2(0.09, 0.09)
 texture = ExtResource("2_oaug8")
 
 [node name="Area2D" type="Area2D" parent="."]

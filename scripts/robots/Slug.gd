@@ -31,7 +31,7 @@ func consume(item: String, amount: int):
 			sprite.frame = 0  # resets to the first frame
 		else:
 			sprite.play("slug_eat")
-	
+
 
 func receive_egg(egg: Node):
 	holding_egg = egg
@@ -43,15 +43,19 @@ func receive_egg(egg: Node):
 
 func consume_egg(egg: Node):
 	eggs_consumed += 1
-	if eggs_consumed >= growth_levels[level]:
+	if eggs_consumed >= game_manager.growth_levels[level]:
 		level += 1
-		if level < egg_saturation_levels.size():
+		if level < game_manager.egg_saturation_levels.size():
 			print("Slug has grown to level: ", level)
 		else:
 			print("Slug has reached maximum growth level!")
 			# TODO: win
 		eggs_consumed = 0  # Reset egg count after growth
 		irritation = 0  # Reset irritation on growth
+		# Reward player for growth
+		if level < game_manager.rewards_per_level.size():
+			var reward = game_manager.rewards_per_level[level]
+			game_manager.add_coins(reward)
 
 
 	# Consume the egg based on its type
@@ -118,9 +122,9 @@ func _draw():
 	
 	# Calculate growth progress
 	var growth_progress = 0.0
-	var current_target = growth_levels[level] if level < growth_levels.size() else growth_levels[-1]
+	var current_target = game_manager.growth_levels[level] if level < game_manager.growth_levels.size() else game_manager.growth_levels[-1]
 	
-	if level < growth_levels.size():
+	if level < game_manager.growth_levels.size():
 		growth_progress = float(eggs_consumed) / float(current_target)
 	else:
 		growth_progress = 1.0  # Max level reached
@@ -137,7 +141,7 @@ func _draw():
 	
 	# Growth text
 	var growth_text = "Level %d | Eggs: %d/%d" % [level, eggs_consumed, current_target]
-	if level >= growth_levels.size():
+	if level >= game_manager.growth_levels.size():
 		growth_text = "Level %d | MAX LEVEL" % level
 	var growth_text_size = font.get_string_size(growth_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	var growth_text_pos = Vector2(-growth_text_size.x / 2, growth_bar_pos.y + bar_height + 15)

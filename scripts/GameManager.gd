@@ -11,13 +11,19 @@ var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
-var coins: int = 100
+# Game settings, balance here
+var coins: int = 20
+var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
+var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
+var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
+var collector_bot_price: int = 10
+
 signal coins_changed()
 
-var collector_bot_price: int = 0
+
 signal collector_price_changed(price: int)
 
-var egg_cost: int = 5  # Coins awarded when slug consumes an egg
+var egg_cost: int = 0  # Coins awarded when slug consumes an egg
 
 func _ready():
 	for robot in get_tree().get_nodes_in_group("robots"):
@@ -32,6 +38,7 @@ func _ready():
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 	
 	spawn_chickens(0)
+
 
 func select_robot(robot: CollectorRobot):
 	selected_robot = robot

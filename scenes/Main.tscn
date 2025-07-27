@@ -37,7 +37,7 @@ curve = SubResource("Curve2D_c01mt")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath/Route"]
 position = Vector2(498.444, 148.326)
-rotation = -0.0423258
+rotation = -0.0423263
 
 [node name="Sprite2D" type="Sprite2D" parent="ChickenNPath/Route/PathFollow2D"]
 position = Vector2(0.870659, 1.50334)
