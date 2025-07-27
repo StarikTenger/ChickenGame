@@ -23,8 +23,8 @@ var freshness_state: EggFreshnessState = EggFreshnessState.FRESH
 func get_freshless_state() -> EggFreshnessState:
 	return freshness_state
 
-@export var time_to_stale := 10.0 # через сколько секунд яйцо станет несвежим
-@export var time_to_rotten := 15.0 # через сколько секунд оно станет гнилым
+@export var time_to_stale := 20.0 # через сколько секунд яйцо станет несвежим
+@export var time_to_rotten := 30.0 # через сколько секунд оно станет гнилым
 
 var freshness_timer := 0.0
 

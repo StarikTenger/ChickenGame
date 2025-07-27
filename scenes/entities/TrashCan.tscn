@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cumw741v75t4s"]
+
+[ext_resource type="Script" path="res://scripts/robots/TrashCan.gd" id="1_v2uck"]
+[ext_resource type="Texture2D" path="res://sprites/empty_hole.png" id="2_v2uck"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v2uck"]
+
+[node name="TrashCan" type="Node2D"]
+script = ExtResource("1_v2uck")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -22)
+scale = Vector2(0.100555, 0.0862694)
+texture = ExtResource("2_v2uck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_v2uck")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -37.0
+offset_top = -86.0
+offset_right = 38.0
+offset_bottom = -63.0
+text = "Trash can"

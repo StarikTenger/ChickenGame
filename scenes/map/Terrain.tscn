@@ -157,7 +157,7 @@ curve = SubResource("Curve2D_sbr4m")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath/Route"]
 position = Vector2(397.809, 72.7056)
-rotation = -0.521807
+rotation = -0.521802
 
 [node name="Sprite2D" type="Sprite2D" parent="ChickenNPath/Route/PathFollow2D"]
 position = Vector2(0.870659, 1.50334)
@@ -179,7 +179,7 @@ curve = SubResource("Curve2D_ki5cf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath2/Route"]
 position = Vector2(316.555, 16.6435)
-rotation = 0.19582
+rotation = 0.195821
 
 [node name="Sprite2D" type="Sprite2D" parent="ChickenNPath2/Route/PathFollow2D"]
 position = Vector2(0.870659, 1.50334)
