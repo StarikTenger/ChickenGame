@@ -34,12 +34,29 @@ func _process(delta: float) -> void:
 	if dragging and ghost:
 		ghost.global_position = cam.absolute_mouse_position()
 		print(delta)
+		
+func is_position_valid(pos: Vector2) -> bool:
+	var nav_maps := NavigationServer2D.get_maps()
+	if nav_maps.is_empty():
+		print("Нет карт в NavigationServer2D")
+		return false
+
+	var map_id := nav_maps[0]
+	var closest := NavigationServer2D.map_get_closest_point(map_id, pos)
+
+	# Проверка расстояния — если далеко, значит вне зоны
+	return closest.distance_to(pos) < 8.0
+
 
 func try_place_bot(pos: Vector2):
 	dragging = false
 	if ghost:
 		ghost.queue_free()
 		ghost = null
+	
+	if not is_position_valid(pos):
+		show_feedback("Нельзя построить здесь!")
+		return
 	
 	var price = gm.collector_bot_price
 	if gm.coins < price:
