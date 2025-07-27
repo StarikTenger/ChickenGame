@@ -160,3 +160,7 @@ func spawn_chickens(count: int):
 			placed_chickens.append(pos)
 		else:
 			print("Не удалось разместить курицу ", i)
+
+func game_over():
+	var lose_ui = get_node("/root/Main/LoseScreen")
+	lose_ui.show_game_over()
