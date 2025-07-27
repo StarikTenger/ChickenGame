@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://4a45drka2bmb"]
+[gd_scene load_steps=6 format=3 uid="uid://4a45drka2bmb"]
 
 [ext_resource type="Script" uid="uid://cpec58ri6np2f" path="res://scripts/MainMenu.gd" id="1_yqorp"]
 [ext_resource type="Texture2D" uid="uid://cmcsvrei3ihyp" path="res://sprites/logo.png" id="2_0ykhv"]
 [ext_resource type="Texture2D" uid="uid://oihwhld4lowx" path="res://sprites/landscape.png" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://ddp57tpo0qjyw" path="res://sprites/menu.png" id="3_l72w3"]
+[ext_resource type="Texture2D" uid="uid://8421xm72l3oi" path="res://sprites/play_button.png" id="5_826wr"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -19,6 +21,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_2wh52")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(621, 286)
+scale = Vector2(0.294213, 0.294213)
+texture = ExtResource("3_l72w3")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -26,16 +33,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -417.0
-offset_top = -147.5
-offset_right = 417.0
-offset_bottom = 147.5
+offset_left = -421.0
+offset_top = -66.0
+offset_right = 413.0
+offset_bottom = 229.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 60
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(476, 100)
 layout_mode = 2
 texture = ExtResource("2_0ykhv")
@@ -47,3 +55,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(140, 100)
 layout_mode = 2
 text = "Play"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/CenterContainer"]
+position = Vector2(423, 53)
+scale = Vector2(0.636364, 0.558824)
+texture = ExtResource("5_826wr")

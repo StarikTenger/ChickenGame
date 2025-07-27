@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cp44tio14uq6u" path="res://scripts/GameUI.gd" id="1_yubou"]
 [ext_resource type="StyleBox" uid="uid://cwh1s7pfyc7rl" path="res://styles/button_style_hovered.tres" id="2_bt76a"]
-[ext_resource type="Texture2D" uid="uid://b3snnkcd1y7mb" path="res://sprites/robot_boy_icon.png" id="2_rns2u"]
+[ext_resource type="Texture2D" uid="uid://25ardx1ba14k" path="res://sprites/robot_boy_icon.png" id="2_rns2u"]
 [ext_resource type="StyleBox" uid="uid://p8b6qb2754u3" path="res://styles/button_style.tres" id="2_u001w"]
 [ext_resource type="StyleBox" uid="uid://bkbaag3tk5f0" path="res://styles/button_style_pressed.tres" id="2_u2dgd"]
-[ext_resource type="Texture2D" uid="uid://cahje14vhucm5" path="res://sprites/coin.png" id="6_djwj0"]
+[ext_resource type="Texture2D" uid="uid://btt3lrwpyk0ug" path="res://sprites/coin.png" id="6_djwj0"]
 
 [node name="GameUI" type="CanvasLayer"]
 
