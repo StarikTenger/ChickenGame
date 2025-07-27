@@ -103,6 +103,7 @@ func toss_egg_to(target: Node):
 
 func _ready():
 	add_to_group("robots")
+	selection_frame.visible = false
 
 func _physics_process(delta):
 	if is_ghost:

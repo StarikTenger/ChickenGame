@@ -76,3 +76,7 @@ func _process(delta):
 			var h = 100 # height of the parabolic arc
 			# Using a parabolic trajectory formula for a more natural flight path
 			position = source_pos.lerp(destination_pos, flight_progress) + Vector2(0, h * (4 * (flight_progress - 0.5) * (flight_progress - 0.5) - 1))
+
+	if state == ItemState.ROBOT and current_owner:
+		# Update the position of the item to follow the owner if they are moving
+		position = current_owner.position
