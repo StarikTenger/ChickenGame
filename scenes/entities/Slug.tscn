@@ -1,14 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq83gdrnlqhud"]
+[gd_scene load_steps=14 format=3 uid="uid://dq83gdrnlqhud"]
 
-[ext_resource type="Script" uid="uid://b7ep87yi4it48" path="res://scripts/robots/Slug.gd" id="1_k2oj2"]
-[ext_resource type="Texture2D" uid="uid://cd7crgdm35wix" path="res://sprites/mega_consumer.png" id="2_b24k5"]
+[ext_resource type="Script" uid="uid://i1dfp6g35rwo" path="res://scripts/robots/Slug.gd" id="1_k2oj2"]
+[ext_resource type="Texture2D" uid="uid://qa57ri3pdalv" path="res://sprites/slug_eat0000.png" id="2_rxu4u"]
 [ext_resource type="Shape2D" uid="uid://c577nsv2noliw" path="res://shapes/mega_consumer_shape.tres" id="3_a06yx"]
+[ext_resource type="Texture2D" uid="uid://bpbogx2ck7juf" path="res://sprites/slug_eat0001.png" id="3_t8p8y"]
+[ext_resource type="Texture2D" uid="uid://t01qt6m7xru6" path="res://sprites/slug_eat0002.png" id="4_cbl8p"]
+[ext_resource type="Texture2D" uid="uid://bohak4qn178d7" path="res://sprites/slug_eat0003.png" id="5_frcak"]
+[ext_resource type="Texture2D" uid="uid://dnmi41udpv7i3" path="res://sprites/slug_eat0004.png" id="6_076gg"]
+[ext_resource type="Texture2D" uid="uid://b7mhvy1t0gv2q" path="res://sprites/slug_eat0005.png" id="7_qcfc2"]
+[ext_resource type="Texture2D" uid="uid://bvpciicka1gqq" path="res://sprites/slug_eat0006.png" id="8_plir2"]
+[ext_resource type="Texture2D" uid="uid://cjw6pbswyrvxr" path="res://sprites/slug_eat0007.png" id="9_juch1"]
+[ext_resource type="Texture2D" uid="uid://dig2lefw7jh6a" path="res://sprites/slug_eat0008.png" id="10_qka8o"]
+[ext_resource type="Texture2D" uid="uid://bne0knya0vbvq" path="res://sprites/slug_idle.png" id="11_o1ino"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxjn0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rxu4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t8p8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cbl8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_frcak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_076gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qcfc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_plir2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_juch1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qka8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o1ino")
+}],
+"loop": false,
+"name": &"slug_eat",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_o1ino")
+}],
+"loop": true,
+"name": &"slug_idle",
+"speed": 12.0
+}]
 
 [node name="MegaConsumer" type="Node2D"]
 script = ExtResource("1_k2oj2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_b24k5")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+scale = Vector2(0.056, 0.056)
+sprite_frames = SubResource("SpriteFrames_vxjn0")
+animation = &"slug_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_a06yx")

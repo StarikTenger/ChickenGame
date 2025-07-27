@@ -20,6 +20,13 @@ func _ready():
 #	start_random_change_timer()
 
 func consume(item: String, amount: int):
+	var sprite = get_node("Sprite2D")
+	print(sprite.sprite_frames.get_animation_names())
+	if "slug_eat" in sprite.sprite_frames.get_animation_names():
+		if sprite.animation == "slug_eat" and sprite.is_playing():
+			sprite.frame = 0  # resets to the first frame
+		else:
+			sprite.play("slug_eat")
 	total_eaten[item] = total_eaten.get(item, 0) + amount
 	
 	if item == preferred_item:
