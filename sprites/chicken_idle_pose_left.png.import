@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sue2ime864ku"
-path="res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"
+uid="uid://dotss4wtf8fpu"
+path="res://.godot/imported/chicken_idle_pose_left.png-eea35af4a1d26d57fd13815e84d59538.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mega_consumer.png"
-dest_files=["res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"]
+source_file="res://sprites/chicken_idle_pose_left.png"
+dest_files=["res://.godot/imported/chicken_idle_pose_left.png-eea35af4a1d26d57fd13815e84d59538.ctex"]
 
 [params]
 

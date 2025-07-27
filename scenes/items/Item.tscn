@@ -1,8 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwnm11e3kignl"]
+[gd_scene load_steps=8 format=3 uid="uid://cwnm11e3kignl"]
 
-[ext_resource type="Script" uid="uid://q3jf18wpb4ee" path="res://scripts/Item.gd" id="1_5uh1b"]
+[ext_resource type="Script" uid="uid://b7kn43u2mu1q1" path="res://scripts/Item.gd" id="1_5uh1b"]
+[ext_resource type="Texture2D" uid="uid://bonxaoush0rn5" path="res://sprites/egg.png" id="2_ti1lt"]
+[ext_resource type="Texture2D" uid="uid://crecqptttn3nr" path="res://sprites/egg_splat0000.png" id="3_tut1f"]
+[ext_resource type="Texture2D" uid="uid://c0q21essoaenm" path="res://sprites/egg_splat0001.png" id="4_sxdbj"]
+[ext_resource type="Texture2D" uid="uid://bbp38yqbuq6yd" path="res://sprites/egg_splat0002.png" id="5_hcsds"]
+[ext_resource type="Texture2D" uid="uid://toxqvs7t4bto" path="res://sprites/egg_splat0003.png" id="6_yyyie"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1e8x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ti1lt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tut1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sxdbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hcsds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yyyie")
+}],
+"loop": false,
+"name": &"egg_splat",
+"speed": 12.0
+}]
 
 [node name="Item" type="Node2D"]
+scale = Vector2(0.056, 0.056)
 script = ExtResource("1_5uh1b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f1e8x")

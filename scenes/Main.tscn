@@ -1,9 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckl15loudy8ry"]
+[gd_scene load_steps=11 format=3 uid="uid://ckl15loudy8ry"]
 
-[ext_resource type="Script" uid="uid://bamd0w7f7gghv" path="res://scripts/GameManager.gd" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://d18vymkihv04i" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cvs2rg1xwqi8y" path="res://scenes/map/Grid.tscn" id="2_rvslj"]
-[ext_resource type="Script" uid="uid://yy3ctpa45xm6" path="res://scenes/main_camera.gd" id="4_rarhs"]
+[ext_resource type="Script" uid="uid://bd7rbkp77jscu" path="res://scenes/main_camera.gd" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="5_vcsgt"]
+
+[sub_resource type="Curve2D" id="Curve2D_c01mt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 252.141, 87.0077, 0, 0, 0, 0, 1113.78, 94.8915, 0, 0, 0, 0, 1111.24, 538.132, 0, 0, 0, 0, 258.066, 535.504, 0, 0, 0, 0, 252.141, 87.0077)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_nxtc6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 599, 658, 0, 0, 0, 0, 41, 307, 0, 0, 0, 0, 597, 44, 0, 0, 0, 0, 1203, 352, 0, 0, 0, 0, 599, 658)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_jlsqs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 42, 76, 0, 0, 0, 0, 1193, 663, 0, 0, 0, 0, 1219, 43, 0, 0, 0, 0, 77, 633, 0, 0, 0, 0, 607, 23, 0, 0, 0, 0, 42, 76)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_q8u5g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 40, 665, 0, 0, 0, 0, 266, 25, 0, 0, 0, 0, 523, 659, 0, 0, 0, 0, 718, 51, 0, 0, 0, 0, 956, 651, 0, 0, 0, 0, 1191, 27, 0, 0, 0, 0, 40, 665)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_lhr70"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 844, 655, 0, 0, 0, 0, 266, 331, 0, 0, 0, 0, 539, 205, 0, 0, 0, 0, 166, 105, 0, 0, 0, 0, 959, 59, 0, 0, 0, 0, 348, 542, 0, 0, 0, 0, 1156, 450, 0, 0, 0, 0, 844, 655)
+}
+point_count = 8
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_elqb8")
@@ -19,3 +50,56 @@ script = ExtResource("1_elqb8")
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(641, 362)
 script = ExtResource("4_rarhs")
+
+[node name="Route1" type="Path2D" parent="."]
+position = Vector2(-196.897, -11.3274)
+scale = Vector2(1.18147, 1.14159)
+curve = SubResource("Curve2D_c01mt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Route1"]
+position = Vector2(252.141, 87.0077)
+rotation = 0.00914952
+
+[node name="Chicken" parent="Route1/PathFollow2D" instance=ExtResource("5_vcsgt")]
+position = Vector2(411.246, -13.3988)
+routes = Array[NodePath]([NodePath("../..")])
+
+[node name="Route2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_nxtc6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Route2"]
+position = Vector2(599, 658)
+rotation = -2.5801
+
+[node name="Chicken" parent="Route2/PathFollow2D" instance=ExtResource("5_vcsgt")]
+routes = Array[NodePath]([NodePath("../..")])
+
+[node name="Route3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jlsqs")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Route3"]
+position = Vector2(42, 76)
+rotation = 0.471609
+
+[node name="Chicken" parent="Route3/PathFollow2D" instance=ExtResource("5_vcsgt")]
+routes = Array[NodePath]([NodePath("../..")])
+
+[node name="Route4" type="Path2D" parent="."]
+curve = SubResource("Curve2D_q8u5g")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Route4"]
+position = Vector2(40, 665)
+rotation = -1.23134
+
+[node name="Chicken" parent="Route4/PathFollow2D" instance=ExtResource("5_vcsgt")]
+routes = Array[NodePath]([NodePath("../..")])
+
+[node name="Route5" type="Path2D" parent="."]
+curve = SubResource("Curve2D_lhr70")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Route5"]
+position = Vector2(844, 655)
+rotation = -2.63068
+
+[node name="Chicken" parent="Route5/PathFollow2D" instance=ExtResource("5_vcsgt")]
+routes = Array[NodePath]([NodePath("../..")])

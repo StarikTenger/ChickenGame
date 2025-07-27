@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sue2ime864ku"
-path="res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"
+uid="uid://hcid153gkcl6"
+path="res://.godot/imported/slug_idle0004.png-843e9cecb69320433b8890cca2b96074.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mega_consumer.png"
-dest_files=["res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"]
+source_file="res://sprites/slug_idle0004.png"
+dest_files=["res://.godot/imported/slug_idle0004.png-843e9cecb69320433b8890cca2b96074.ctex"]
 
 [params]
 

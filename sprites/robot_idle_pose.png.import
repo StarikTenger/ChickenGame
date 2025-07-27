@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sue2ime864ku"
-path="res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"
+uid="uid://b2cjh1ajhrpxt"
+path="res://.godot/imported/robot_idle_pose.png-d64f274d58e79219bd1cb7801d4f42d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mega_consumer.png"
-dest_files=["res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"]
+source_file="res://sprites/robot_idle_pose.png"
+dest_files=["res://.godot/imported/robot_idle_pose.png-d64f274d58e79219bd1cb7801d4f42d5.ctex"]
 
 [params]
 

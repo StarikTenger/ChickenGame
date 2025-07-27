@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sue2ime864ku"
-path="res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"
+uid="uid://bbp38yqbuq6yd"
+path="res://.godot/imported/egg_splat0002.png-2d5b1d38efa05b664b60f65dc8c25c6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mega_consumer.png"
-dest_files=["res://.godot/imported/mega_consumer.png-712793943762f7ad45ca4869ac2f0235.ctex"]
+source_file="res://sprites/egg_splat0002.png"
+dest_files=["res://.godot/imported/egg_splat0002.png-2d5b1d38efa05b664b60f65dc8c25c6b.ctex"]
 
 [params]
 
