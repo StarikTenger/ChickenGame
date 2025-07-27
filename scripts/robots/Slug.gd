@@ -83,6 +83,7 @@ func _process(delta):
 	# Check if irritation threshold is reached
 	if irritation >= irritation_threshold:
 		game_over.emit()
+		game_manager.game_over()
 		print("Slug irritation reached threshold! Game Over!")
 
 func _draw():
