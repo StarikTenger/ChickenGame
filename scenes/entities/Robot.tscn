@@ -32,4 +32,6 @@ shape = SubResource("CircleShape2D_qlqxp")
 position = Vector2(8, 11)
 shape = SubResource("CircleShape2D_1r7id")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

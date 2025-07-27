@@ -1,6 +1,6 @@
 extends Node2D
 
-var game_manager: Node
+@onready var game_manager: Node = get_node("/root/Main")
 
 var awaiting_egg: bool = false # If true, waiting for egg to arrive
 var holding_egg: Node = null # Reference to the egg being delivered
@@ -88,6 +88,7 @@ func _process(delta):
 	# Check if irritation threshold is reached
 	if irritation >= irritation_threshold:
 		game_over.emit()
+		game_manager.game_over()
 		print("Slug irritation reached threshold! Game Over!")
 
 func _draw():

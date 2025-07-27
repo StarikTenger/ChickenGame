@@ -4,6 +4,7 @@ class_name GameManager
 @onready var robot_container: Node = $Robots
 @onready var cam := get_node("/root/Main/MainCamera")
 
+
 var selected_robot: CollectorRobot = null
 
 @onready var items_container := get_node("Items")
@@ -32,7 +33,6 @@ func _ready():
 		if robot.has_signal("robot_selected"):
 			robot.connect("robot_selected", Callable(self, "_on_robot_selected"))
 			print("Подписал стартового робота:", robot.name)
-	spawn_mega_consumer()
 	
 	# Подписываемся на сигнал выбора робота
 	for robot in robot_container.get_children():
@@ -118,6 +118,11 @@ func add_coins(amount: int):
 	coins_changed.emit()
 
 
+func build_terrain():
+	var terrain = terrain_scene.instantiate()
+	add_child(terrain)
+	return
+
 func spawn_chickens(count: int):
 	var center := Vector2(640, 360)   # центр карты
 	var forbidden_radius := 200.0     # не ближе 200 пикселей к центру
@@ -160,3 +165,7 @@ func spawn_chickens(count: int):
 			placed_chickens.append(pos)
 		else:
 			print("Не удалось разместить курицу ", i)
+
+func game_over():
+	var lose_ui = get_node("/root/Main/LoseScreen")
+	lose_ui.show_game_over()

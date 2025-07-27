@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckl15loudy8ry"]
+[gd_scene load_steps=10 format=3 uid="uid://ckl15loudy8ry"]
 
 [ext_resource type="Script" uid="uid://d18vymkihv04i" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bd7rbkp77jscu" path="res://scenes/main_camera.gd" id="4_rarhs"]
 [ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="5_c01mt"]
 [ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="5_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://edyto6mesfqm" path="res://scenes/map/Terrain.tscn" id="7_jlsqs"]
+[ext_resource type="PackedScene" uid="uid://8gmttfot07im" path="res://scenes/lose_screen.tscn" id="7_nxtc6"]
 
 [sub_resource type="Curve2D" id="Curve2D_c01mt"]
 _data = {
@@ -15,6 +17,8 @@ point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_elqb8")
+
+[node name="Terrain" parent="." instance=ExtResource("7_jlsqs")]
 
 [node name="GameUI" parent="." instance=ExtResource("2_0bbpv")]
 
@@ -49,3 +53,5 @@ position = Vector2(70, 80)
 rotation = -0.0688565
 scale = Vector2(1.18127, 1.1418)
 skew = -0.00487781
+
+[node name="LoseScreen" parent="." instance=ExtResource("7_nxtc6")]
