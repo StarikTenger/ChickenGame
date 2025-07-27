@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://gitujn07gqgc"]
 
-[ext_resource type="Script" uid="uid://df1ohngxtyi0c" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
-[ext_resource type="Texture2D" uid="uid://d0gkg2ir1w6gv" path="res://sprites/collector.png" id="2_qlqxp"]
+[ext_resource type="Script" uid="uid://8o1hw1vibs54" path="res://scripts/robots/Robot.gd" id="1_lx7qx"]
+[ext_resource type="Texture2D" uid="uid://duqhwopi2mjhh" path="res://sprites/robot_idle_pose.png" id="2_oaug8"]
 [ext_resource type="Texture2D" uid="uid://cq2w60efeudtc" path="res://sprites/collector_s.png" id="3_oaug8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlqxp"]
@@ -13,7 +13,9 @@ radius = 17.0294
 script = ExtResource("1_lx7qx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qlqxp")
+position = Vector2(5, 7)
+scale = Vector2(0.056, 0.056)
+texture = ExtResource("2_oaug8")
 
 [node name="Area2D" type="Area2D" parent="."]
 

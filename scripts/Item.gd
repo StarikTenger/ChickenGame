@@ -56,7 +56,7 @@ func _ready():
 	add_to_group("items")
 	match item_name:
 		"egg":
-			sprite.texture = load("res://sprites/items/egg.png")
+			sprite.texture = load("res://sprites/egg.png")
 		"egg2":
 			sprite.texture = load("res://sprites/items/egg2.png")
 		_:

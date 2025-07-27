@@ -21,6 +21,9 @@ func _ready():
 func _process(delta):
 	var dir = (target_position - global_position).normalized()
 	velocity = dir * speed
+	var chicken_sprite = $Sprite2D
+	if velocity.x != 0:
+		chicken_sprite.scale.x = - sign(velocity.x) * abs(chicken_sprite.scale.x)
 	move_and_slide()
 
 	if global_position.distance_to(target_position) < 10:
