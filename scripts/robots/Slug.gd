@@ -13,6 +13,7 @@ var irritation_decrease: float = 10 # Irritation deacrease per egg
 var eggs_consumed: int = 0 # Count of eggs consumed
 var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
 var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
+var rewards_per_level: Array = [10, 20, 30, 40] # Money rewards for each growth level
 var level: int = 0 # Current growth level
 
 signal game_over
@@ -52,6 +53,10 @@ func consume_egg(egg: Node):
 			# TODO: win
 		eggs_consumed = 0  # Reset egg count after growth
 		irritation = 0  # Reset irritation on growth
+		# Reward player for growth
+		if level < rewards_per_level.size():
+			var reward = rewards_per_level[level]
+			game_manager.add_coins(reward)
 
 
 	# Consume the egg based on its type

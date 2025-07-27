@@ -11,13 +11,13 @@ var item_scene := preload("res://scenes/items/Item.tscn")
 var collector_scene := preload("res://scenes/entities/Robot.tscn")
 var chicken_scene := preload("res://scenes/entities/Chicken.tscn")
 
-var coins: int = 100
+var coins: int = 20
 signal coins_changed()
 
-var collector_bot_price: int = 0
+var collector_bot_price: int = 10
 signal collector_price_changed(price: int)
 
-var egg_cost: int = 5  # Coins awarded when slug consumes an egg
+var egg_cost: int = 0  # Coins awarded when slug consumes an egg
 
 func _ready():
 	for robot in get_tree().get_nodes_in_group("robots"):
