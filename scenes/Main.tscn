@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckl15loudy8ry"]
+[gd_scene load_steps=10 format=3 uid="uid://ckl15loudy8ry"]
 
 [ext_resource type="Script" uid="uid://d18vymkihv04i" path="res://scripts/GameManager.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://40ly1prbivcd" path="res://scenes/game_ui.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://cvs2rg1xwqi8y" path="res://scenes/map/Grid.tscn" id="2_rvslj"]
 [ext_resource type="Script" uid="uid://bd7rbkp77jscu" path="res://scenes/main_camera.gd" id="4_rarhs"]
+[ext_resource type="Texture2D" uid="uid://dodhtetfkf2no" path="res://icon.svg" id="5_c01mt"]
+[ext_resource type="PackedScene" uid="uid://cujfp7ibhtujw" path="res://scenes/entities/Chicken.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://edyto6mesfqm" path="res://scenes/map/Terrain.tscn" id="7_jlsqs"]
+[ext_resource type="PackedScene" uid="uid://8gmttfot07im" path="res://scenes/lose_screen.tscn" id="7_nxtc6"]
+
+[sub_resource type="Curve2D" id="Curve2D_c01mt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 498.444, 148.326, 0, 0, 0, 0, 1456.66, 107.744, 0, 0, 0, 0, 1452.43, 650.847, 0, 0, 0, 0, 517.152, 643.839, 0, 0, 0, 0, 498.444, 148.326)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_elqb8")
@@ -22,3 +31,27 @@ script = ExtResource("1_elqb8")
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(641, 362)
 script = ExtResource("4_rarhs")
+
+[node name="ChickenNPath" type="Node" parent="."]
+
+[node name="Route" type="Path2D" parent="ChickenNPath"]
+position = Vector2(-503, -77)
+scale = Vector2(1.18147, 1.14159)
+curve = SubResource("Curve2D_c01mt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ChickenNPath/Route"]
+position = Vector2(498.444, 148.326)
+rotation = -0.0423263
+
+[node name="Sprite2D" type="Sprite2D" parent="ChickenNPath/Route/PathFollow2D"]
+position = Vector2(0.870659, 1.50334)
+scale = Vector2(0.0812312, 0.0849506)
+texture = ExtResource("5_c01mt")
+
+[node name="Chicken" parent="ChickenNPath" instance=ExtResource("5_vcsgt")]
+position = Vector2(70, 80)
+rotation = -0.0688565
+scale = Vector2(1.18127, 1.1418)
+skew = -0.00487781
+
+[node name="LoseScreen" parent="." instance=ExtResource("7_nxtc6")]
