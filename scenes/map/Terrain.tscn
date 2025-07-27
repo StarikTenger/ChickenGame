@@ -60,6 +60,8 @@ script = ExtResource("3_ki5cf")
 
 [node name="Polygon2D" type="Polygon2D" parent="NavigationRegion2D/lake"]
 texture = ExtResource("3_04uju")
+polygon = PackedVector2Array(3139.67, 266.15)
+uv = PackedVector2Array(3139.67, 266.15)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/lake"]
 polygon = PackedVector2Array(1289, 206, 1458, 269, 1145, 460, 982, 265)
@@ -92,7 +94,7 @@ scale = Vector2(0.0812312, 0.0849506)
 texture = ExtResource("2_4had2")
 
 [node name="Chicken" parent="ChickenNPath" instance=ExtResource("3_b6ov8")]
-position = Vector2(251, -32)
+position = Vector2(1170, 374)
 rotation = -0.0688565
 scale = Vector2(1.18127, 1.1418)
 skew = -0.00487781
