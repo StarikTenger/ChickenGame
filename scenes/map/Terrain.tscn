@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dq83gdrnlqhud" path="res://scenes/entities/Slug.tscn" id="5_sbr4m"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sbr4m"]
-vertices = PackedVector2Array(1292.15, 168.406, 914.578, 240.969, 853.82, 124.492, 2227.68, -97.6797, 2227.68, 899.57, 1496.32, 288.156, 1491.99, 242.906, 739.008, 275.438, 838.5, 461.594, 1137.2, 507.312, -52.2969, 892.781, 785.75, 553.891, 566.992, 548.039, 338.68, 402.953, -42.0469, -97.6797, 338.68, 132.133, 723.281, 14.4766)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 2, 1, 8), PackedInt32Array(8, 1, 9), PackedInt32Array(9, 5, 4), PackedInt32Array(9, 4, 10, 11), PackedInt32Array(11, 8, 9), PackedInt32Array(12, 11, 10), PackedInt32Array(13, 12, 10), PackedInt32Array(13, 10, 14, 15), PackedInt32Array(16, 15, 14), PackedInt32Array(16, 14, 3), PackedInt32Array(2, 16, 3), PackedInt32Array(0, 3, 6)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-78, -134, 2264, -134, 2264, 936, -89, 929)])
+vertices = PackedVector2Array(1250.63, 75.7266, 1466.83, 165.023, 1343.88, 175.898, 847.117, 111.938, 1169.69, 54.0078, 1225.08, 192.562, 1703.24, 261.102, 2077.13, -146.898, 1792.88, 1102.25, 1678.21, 396.594, 1442.4, 712.102, 1385.53, 834.562, 1485.24, 505.219, 1563.39, 446.602, 1354.42, 632, 1404.18, -118.938, 1372.09, -208.172, 1592.54, 193.078, 1386.51, -21.6797, 1503.78, 180.688, 1145.96, 262.891, 833.953, 198.312, 1337.32, 506.422, 1181.82, 615.438, 1341.17, 36.8828, 440.781, 1129.18, 1271.83, 838.312, 1114.65, 840.273, 867.898, 939.812, 1221.9, 413.422, 999.609, 640.531, 1086.83, -322.781, 1282.57, -234.406, 1201.59, -200.344, 1147.62, -165.953, 1.15625, -17.7969, 1124.7, -49.0078, 727.406, 8.85938, 614.742, 19.1016, 777.906, 302.977, 765.523, 266.609, 765.758, 259.672, 1172.26, 357.867, 819.969, 367.609, 801.578, 47.8906, 840.562, 457.719, 732.773, 735.422, 791.594, 543.422, 677.07, 548.391, 576.047, 538.82, 670.867, 848.703, 423.008, 493.352, 537.961, 39.0781, 460.547, 63.4688, 345.727, 127.531, 332.508, 260.969, 344.82, 387.508, 715.891, 959.641, 964.852, 869.117)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(3, 2, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 9, 8, 11), PackedInt32Array(12, 13, 9, 10, 14), PackedInt32Array(15, 16, 7, 6, 17), PackedInt32Array(18, 15, 17, 19, 1), PackedInt32Array(3, 5, 20, 21), PackedInt32Array(22, 12, 14, 23), PackedInt32Array(24, 18, 1), PackedInt32Array(11, 8, 25, 26), PackedInt32Array(27, 26, 25, 28), PackedInt32Array(29, 22, 23, 30), PackedInt32Array(31, 7, 16, 32), PackedInt32Array(31, 32, 33), PackedInt32Array(31, 33, 34, 35), PackedInt32Array(35, 34, 36, 37, 38), PackedInt32Array(39, 40, 41, 21, 42, 29, 30, 43), PackedInt32Array(0, 24, 1), PackedInt32Array(36, 4, 3, 44), PackedInt32Array(21, 20, 42), PackedInt32Array(45, 43, 30), PackedInt32Array(45, 30, 46, 47), PackedInt32Array(48, 47, 46), PackedInt32Array(49, 48, 46, 50), PackedInt32Array(51, 49, 50, 25), PackedInt32Array(36, 44, 37), PackedInt32Array(35, 38, 52), PackedInt32Array(35, 52, 53), PackedInt32Array(35, 53, 54), PackedInt32Array(35, 54, 55), PackedInt32Array(35, 55, 56), PackedInt32Array(25, 35, 56, 51), PackedInt32Array(25, 50, 57), PackedInt32Array(28, 58, 27), PackedInt32Array(25, 57, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-47, -42, 1085, -360, 2121, -176, 1822, 1138, 416, 1166)])
 agent_radius = 36.32
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qrm1t"]
@@ -33,7 +33,22 @@ point_count = 5
 
 [node name="Terrain" type="Node2D"]
 
+[node name="BigWater" type="TextureRect" parent="."]
+offset_left = -4349.0
+offset_top = -2619.0
+offset_right = 5609.0
+offset_bottom = 3097.0
+texture = ExtResource("3_04uju")
+stretch_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("4_b6ov8")
+texture_scale = Vector2(1, 0.775)
+polygon = PackedVector2Array(-57, -30, 72, -140, 354, -237, 618, -293, 885, -370, 957, -370, 1060, -351, 1145, -335, 1264, -307, 1396, -288, 1594, -247, 1688, -191, 1729, -119, 1751, 4, 1757, 132, 1748, 248, 1719, 377, 1688, 547, 1641, 697, 1597, 845, 1547, 939, 1468, 983, 1346, 983, 1133, 995, 947, 1005, 656, 1002, 521, 1005, 401, 1008, 298, 986, 222, 942, 207, 901, 172, 835, 169, 760, 144, 700, 128, 606, 97, 521, 59, 446, 15, 358, -38, 204, -73, 98)
+
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 offset_left = -6177.0
 offset_top = -2762.0
 offset_right = 3781.0
@@ -60,9 +75,12 @@ script = ExtResource("3_ki5cf")
 
 [node name="Polygon2D" type="Polygon2D" parent="NavigationRegion2D/lake"]
 texture = ExtResource("3_04uju")
+polygon = PackedVector2Array(3139.67, 266.15)
+uv = PackedVector2Array(3139.67, 266.15)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/lake"]
-polygon = PackedVector2Array(1289, 206, 1458, 269, 1145, 460, 982, 265)
+position = Vector2(205, 10)
+polygon = PackedVector2Array(1289, 206, 1375, 218, 1458, 269, 1441, 361, 1340, 405, 1268, 459, 1145, 460, 1042, 377, 1000, 330, 982, 265, 1036, 217, 1143, 202, 1256, 192)
 
 [node name="lake2" type="StaticBody2D" parent="NavigationRegion2D"]
 position = Vector2(194, 77)
@@ -72,8 +90,32 @@ script = ExtResource("3_ki5cf")
 texture = ExtResource("3_04uju")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/lake2"]
-position = Vector2(-761, -25)
-polygon = PackedVector2Array(1263, 220, 1364, 409, 1332, 465, 1145, 460, 942, 331, 942, 107, 1282, 3, 1371, 78)
+position = Vector2(-756, -34)
+polygon = PackedVector2Array(1291, 229, 1307, 276, 1348, 339, 1364, 409, 1332, 465, 1240, 469, 1145, 460, 1007, 419, 942, 331, 931, 218, 942, 107, 1037, 54, 1110, 31, 1183, 12, 1282, 3, 1339, 33, 1371, 78, 1362, 137, 1292, 200)
+
+[node name="lake3" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(194, 77)
+script = ExtResource("3_ki5cf")
+
+[node name="Polygon2D" type="Polygon2D" parent="NavigationRegion2D/lake3"]
+texture = ExtResource("3_04uju")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/lake3"]
+position = Vector2(-1068.46, 363.123)
+scale = Vector2(1.78369, 0.999067)
+polygon = PackedVector2Array(1242, 227, 1275, 281, 1254.85, 359, 1204.21, 362, 1115.17, 364, 1025.58, 395, 972.159, 465, 908.164, 480, 892.583, 411, 918.737, 325, 1058, 236, 1155, 212)
+
+[node name="lake4" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(194, 77)
+script = ExtResource("3_ki5cf")
+
+[node name="Polygon2D" type="Polygon2D" parent="NavigationRegion2D/lake4"]
+texture = ExtResource("3_04uju")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/lake4"]
+position = Vector2(302, -519)
+scale = Vector2(0.682901, 1.16076)
+polygon = PackedVector2Array(1242, 227, 1275, 281, 1254, 349, 1204, 387, 1101, 413, 1025, 401, 976, 335, 1002, 257, 1058, 236, 1155, 212)
 
 [node name="ChickenNPath" type="Node" parent="."]
 
