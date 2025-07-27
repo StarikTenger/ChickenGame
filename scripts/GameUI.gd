@@ -1,10 +1,10 @@
 extends Control
 
 
-@onready var collector_button := $BuildBar/CollectorSlot/VBoxContainer/CollectorButton
-@onready var collector_label := $BuildBar/CollectorSlot/VBoxContainer/CollectorLabel
+@onready var collector_button := $BuildBar/CollectorRobot/CollectorButton
+@onready var collector_label := $BuildBar/CollectorRobot/CollectorLabel
 @onready var feedback_label := $FeedbackLabel
-@onready var coins_label := $CoinsLabel
+@onready var coins_label := $CoinsInfo/CoinsLabel
 @onready var gm := get_node("/root/Main")
 @onready var cam := get_node("/root/Main/MainCamera")
 
@@ -79,9 +79,9 @@ func update_collector_ui():
 	print("Обновление UI: монет =", gm.coins, ", цена =", gm.collector_bot_price)
 	var price = gm.collector_bot_price
 	var can_afford = gm.coins >= price
-	coins_label.text = str(gm.coins) + "$"
+	coins_label.text = "Balance: " + str(gm.coins) + "$"
 
-	collector_label.text = "Сборщик (" + str(price) + "$)"
+	collector_label.text = "Tossing Robot (" + str(price) + "$)"
 	if can_afford:
 		collector_button.modulate = Color.WHITE
 	else:
