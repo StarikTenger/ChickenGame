@@ -10,6 +10,11 @@ var irritation_threshold: float = 20.0 # Threshold for irritation, seconds
 var irritation_increase_rate: float = 1.0 # Rate of irritation increase per second
 var irritation_decrease: float = 10 # Irritation deacrease per egg
 
+var eggs_consumed: int = 0 # Count of eggs consumed
+var growth_levels: Array = [10, 20, 30, 40] # Levels of growth based on eggs consumed
+var egg_saturation_levels: Array = [10, 5, 3, 1] # Saturation levels for growth stages
+var level: int = 0 # Current growth level
+
 signal game_over
 signal level_complete
 
@@ -37,6 +42,18 @@ func receive_egg(egg: Node):
 	print("Slug received and consumed egg: ", egg.item_name)
 
 func consume_egg(egg: Node):
+	eggs_consumed += 1
+	if eggs_consumed >= growth_levels[level]:
+		level += 1
+		if level < egg_saturation_levels.size():
+			print("Slug has grown to level: ", level)
+		else:
+			print("Slug has reached maximum growth level!")
+			# TODO: win
+		eggs_consumed = 0  # Reset egg count after growth
+		irritation = 0  # Reset irritation on growth
+
+
 	# Consume the egg based on its type
 	consume(egg.item_name, 1)
 	
@@ -92,3 +109,36 @@ func _draw():
 	var text_size = font.get_string_size(irritation_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 	var text_pos = Vector2(-text_size.x / 2, bar_pos.y - 5)
 	draw_string(font, text_pos, irritation_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+	
+	# Draw growth bar below irritation bar
+	var growth_bar_pos = Vector2(-bar_width / 2, bar_pos.y + bar_height + 10)
+	
+	# Background bar for growth (dark gray)
+	draw_rect(Rect2(growth_bar_pos, Vector2(bar_width, bar_height)), Color.DIM_GRAY)
+	
+	# Calculate growth progress
+	var growth_progress = 0.0
+	var current_target = growth_levels[level] if level < growth_levels.size() else growth_levels[-1]
+	
+	if level < growth_levels.size():
+		growth_progress = float(eggs_consumed) / float(current_target)
+	else:
+		growth_progress = 1.0  # Max level reached
+	
+	growth_progress = clamp(growth_progress, 0.0, 1.0)
+	var growth_fill_width = bar_width * growth_progress
+	
+	# Growth bar color (blue to gold based on progress)
+	var growth_color = Color.BLUE.lerp(Color.GOLD, growth_progress)
+	draw_rect(Rect2(growth_bar_pos, Vector2(growth_fill_width, bar_height)), growth_color)
+	
+	# Border around growth bar
+	draw_rect(Rect2(growth_bar_pos, Vector2(bar_width, bar_height)), Color.WHITE, false, 1.0)
+	
+	# Growth text
+	var growth_text = "Level %d | Eggs: %d/%d" % [level, eggs_consumed, current_target]
+	if level >= growth_levels.size():
+		growth_text = "Level %d | MAX LEVEL" % level
+	var growth_text_size = font.get_string_size(growth_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+	var growth_text_pos = Vector2(-growth_text_size.x / 2, growth_bar_pos.y + bar_height + 15)
+	draw_string(font, growth_text_pos, growth_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.YELLOW)
