@@ -42,6 +42,7 @@ func try_tossing(delta):
 	toss_timer -= delta
 	if toss_timer > 0:
 		return
+	print("rotten flag: " + str(holding_egg) + " " + str(is_moving) + " " + str(is_ghost))
 	if holding_egg == null:
 		return
 	if is_moving or is_ghost:
@@ -75,7 +76,6 @@ func toss_egg_to(target: Node):
 			sprite.frame = 0  # resets to the first frame
 		else:
 			print("START THROW ANIMATION")
-			holding_egg.visible = false  # Hide egg during animation
 			sprite.play("robot_throw")
 	
 	# Wait for the animation before tossing
@@ -93,7 +93,6 @@ func toss_egg_to(target: Node):
 	# Rotate the egg to match the end of the animation
 	holding_egg.rotation = -0.7 #-120*180/3.14
 	holding_egg.tossing_dir = randi() % 2 * 2 - 1
-	holding_egg.visible = true  # Show egg after animation
 			
 	target.awaiting_egg = true
 	holding_egg.state = holding_egg.ItemState.IN_FLIGHT
